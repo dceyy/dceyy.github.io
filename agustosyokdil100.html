@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Veri Kartları</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .card h3 {
+            margin: 10px 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="cardContainer"></div>
+    <script>
+        const jsonData = {
+            "words": [
+                {
+                    "english": "advance",
+                    "turkish": ["ilerleme"],
+                    "synonyms": ["progress"],
+                    "sentence1": "The army made a significant **advance** toward the enemy lines.",
+                    "sentence2": "Technological **progress** has transformed modern medicine."
+                },
+                {
+                    "english": "devastation",
+                    "turkish": ["yıkım", "tahribat"],
+                    "synonyms": ["destruction"],
+                    "sentence1": "The earthquake caused widespread **devastation** in the region.",
+                    "sentence2": "The **destruction** of forests threatens biodiversity."
+                },
+                {
+                    "english": "notably",
+                    "turkish": ["özellikle"],
+                    "synonyms": ["particularly", "especially"],
+                    "sentence1": "The conference was **notably** attended by Nobel laureates.",
+                    "sentence2": "This theory is **especially** relevant to quantum physics."
+                },
+                {
+                    "english": "amplify",
+                    "turkish": ["güçlendirmek"],
+                    "synonyms": ["intensify"],
+                    "sentence1": "The microphone was used to **amplify** the speaker's voice.",
+                    "sentence2": "The government plans to **intensify** efforts against climate change."
+                },
+                {
+                    "english": "trigger",
+                    "turkish": ["tetiklemek"],
+                    "synonyms": ["initiate", "set off"],
+                    "sentence1": "The comment **triggered** a heated debate.",
+                    "sentence2": "The alarm system **set off** automatically."
+                },
+                {
+                    "english": "decline",
+                    "turkish": ["düşüş", "azalma"],
+                    "synonyms": ["decrease"],
+                    "sentence1": "There has been a sharp **decline** in bee populations.",
+                    "sentence2": "The government aims to **decrease** carbon emissions by 2030."
+                },
+                {
+                    "english": "constituent",
+                    "turkish": ["bileşen"],
+                    "synonyms": ["component"],
+                    "sentence1": "Each **constituent** of the mixture plays a vital role.",
+                    "sentence2": "The machine's main **component** is made of titanium."
+                },
+                {
+                    "english": "assumption",
+                    "turkish": ["varsayım"],
+                    "synonyms": ["presumption"],
+                    "sentence1": "The theory is based on a false **assumption**.",
+                    "sentence2": "The **presumption** of innocence is a fundamental legal principle."
+                },
+                {
+                    "english": "fundamental",
+                    "turkish": ["temel", "esas"],
+                    "synonyms": ["essential"],
+                    "sentence1": "Respect is a **fundamental** part of any relationship.",
+                    "sentence2": "Water is **essential** for all forms of life."
+                },
+                {
+                    "english": "diverse",
+                    "turkish": ["çeşitli"],
+                    "synonyms": ["varied", "various"],
+                    "sentence1": "The city is known for its **diverse** cultural heritage.",
+                    "sentence2": "The museum offers **various** exhibits from different eras."
+                },
+                {
+                    "english": "quantify",
+                    "turkish": ["sayısallaştırmak"],
+                    "synonyms": [],
+                    "sentence1": "It is difficult to **quantify** the emotional impact of art.",
+                    "sentence2": "Scientists developed a model to **quantify** environmental risks."
+                },
+                {
+                    "english": "occurrence",
+                    "turkish": ["olay", "vaka"],
+                    "synonyms": ["incident", "event"],
+                    "sentence1": "Solar eclipses are a rare **occurrence**.",
+                    "sentence2": "The **incident** was reported to the authorities immediately."
+                },
+                {
+                    "english": "orbit",
+                    "turkish": ["yörünge"],
+                    "synonyms": ["trajectory"],
+                    "sentence1": "The satellite was launched into Earth's **orbit**.",
+                    "sentence2": "The comet's **trajectory** was calculated by astronomers."
+                },
+                {
+                    "english": "mortality",
+                    "turkish": ["ölüm oranı"],
+                    "synonyms": ["death rate"],
+                    "sentence1": "The **mortality** rate has decreased due to medical advancements.",
+                    "sentence2": "The **death rate** from the disease has risen sharply."
+                },
+                {
+                    "english": "intervention",
+                    "turkish": ["müdahale"],
+                    "synonyms": ["interference"],
+                    "sentence1": "The teacher's **intervention** helped resolve the conflict.",
+                    "sentence2": "The government's **interference** in the market caused controversy."
+                },
+                {
+                    "english": "surveillance",
+                    "turkish": ["gözetim"],
+                    "synonyms": ["observation"],
+                    "sentence1": "The building is under 24-hour **surveillance**.",
+                    "sentence2": "The scientist's **observation** led to a groundbreaking discovery."
+                },
+                {
+                    "english": "cognitive",
+                    "turkish": ["bilişsel"],
+                    "synonyms": ["mental"],
+                    "sentence1": "Playing chess improves **cognitive** abilities.",
+                    "sentence2": "The patient showed signs of **mental** fatigue."
+                },
+                {
+                    "english": "compelling",
+                    "turkish": ["ikna edici"],
+                    "synonyms": ["convincing"],
+                    "sentence1": "The lawyer presented a **compelling** argument.",
+                    "sentence2": "The evidence was **convincing** enough to secure a verdict."
+                },
+                {
+                    "english": "explicitly",
+                    "turkish": ["açıkça"],
+                    "synonyms": ["clearly"],
+                    "sentence1": "The instructions were **explicitly** stated in the manual.",
+                    "sentence2": "The rules were **clearly** explained to all participants."
+                },
+                {
+                    "english": "enhance",
+                    "turkish": ["geliştirmek"],
+                    "synonyms": ["improve", "boost"],
+                    "sentence1": "The new software will **enhance** productivity.",
+                    "sentence2": "Regular exercise can **improve** overall health."
+                },
+                {
+                    "english": "feasible",
+                    "turkish": ["uygulanabilir"],
+                    "synonyms": ["practical", "viable"],
+                    "sentence1": "The plan seems **feasible** with the current resources.",
+                    "sentence2": "The project is **viable** only if we secure additional funding."
+                },
+                {
+                    "english": "subsequent",
+                    "turkish": ["sonraki"],
+                    "synonyms": ["following"],
+                    "sentence1": "The **subsequent** chapters of the book delve deeper into the topic.",
+                    "sentence2": "The **following** day, the team resumed their work."
+                },
+                {
+                    "english": "infrastructure",
+                    "turkish": ["altyapı"],
+                    "synonyms": ["foundation"],
+                    "sentence1": "The country's **infrastructure** needs significant upgrades.",
+                    "sentence2": "The **foundation** of the building was reinforced to withstand earthquakes."
+                },
+                {
+                    "english": "tremendous",
+                    "turkish": ["muazzam"],
+                    "synonyms": ["enormous"],
+                    "sentence1": "The project required a **tremendous** amount of effort.",
+                    "sentence2": "The **enormous** statue attracted tourists from all over the world."
+                },
+                {
+                    "english": "paramount",
+                    "turkish": ["çok önemli"],
+                    "synonyms": ["crucial"],
+                    "sentence1": "Safety is of **paramount** importance in this experiment.",
+                    "sentence2": "Teamwork is **crucial** for the success of the project."
+                },
+                {
+                    "english": "intricate",
+                    "turkish": ["karmaşık"],
+                    "synonyms": ["complicated"],
+                    "sentence1": "The artist created an **intricate** design on the canvas.",
+                    "sentence2": "The instructions were too **complicated** for beginners."
+                },
+                {
+                    "english": "empirical",
+                    "turkish": ["deneysel"],
+                    "synonyms": ["experiential"],
+                    "sentence1": "The theory is based on **empirical** evidence.",
+                    "sentence2": "The study relies on **experiential** data collected over years."
+                },
+                {
+                    "english": "implication",
+                    "turkish": ["çıkarım"],
+                    "synonyms": ["consequence"],
+                    "sentence1": "The **implication** of the new law is still unclear.",
+                    "sentence2": "The **consequence** of his actions was severe."
+                },
+                {
+                    "english": "inevitable",
+                    "turkish": ["kaçınılmaz"],
+                    "synonyms": ["unavoidable"],
+                    "sentence1": "Change is **inevitable** in any growing organization.",
+                    "sentence2": "The conflict was **unavoidable** given the circumstances."
+                },
+                {
+                    "english": "resilience",
+                    "turkish": ["dayanıklılık"],
+                    "synonyms": ["toughness"],
+                    "sentence1": "The community showed great **resilience** after the disaster.",
+                    "sentence2": "The material's **toughness** makes it ideal for construction."
+                },
+                {
+                    "english": "extensive",
+                    "turkish": ["kapsamlı"],
+                    "synonyms": ["comprehensive"],
+                    "sentence1": "The research required **extensive** fieldwork.",
+                    "sentence2": "The report provides a **comprehensive** analysis of the issue."
+                },
+                {
+                    "english": "unprecedented",
+                    "turkish": ["benzeri görülmemiş"],
+                    "synonyms": [],
+                    "sentence1": "The pandemic caused **unprecedented** global disruptions.",
+                    "sentence2": "The company achieved **unprecedented** success in its first year."
+                },
+                {
+                    "english": "facilitate",
+                    "turkish": ["kolaylaştırmak"],
+                    "synonyms": ["enable"],
+                    "sentence1": "The new software will **facilitate** data analysis.",
+                    "sentence2": "The grant will **enable** further research in the field."
+                },
+                {
+                    "english": "initiative",
+                    "turkish": ["girişim"],
+                    "synonyms": ["ventures", "undertaking"],
+                    "sentence1": "The company launched a new **initiative** to reduce waste.",
+                    "sentence2": "The **undertaking** required significant investment."
+                },
+                {
+                    "english": "abundant",
+                    "turkish": ["bol"],
+                    "synonyms": ["plentiful"],
+                    "sentence1": "The region is known for its **abundant** natural resources.",
+                    "sentence2": "The harvest was **plentiful** this year."
+                },
+                {
+                    "english": "equivalent",
+                    "turkish": ["eşdeğer"],
+                    "synonyms": ["equal", "comparable"],
+                    "sentence1": "The two products are **equivalent** in quality.",
+                    "sentence2": "The tasks are **comparable** in difficulty."
+                },
+                {
+                    "english": "profound",
+                    "turkish": ["derin"],
+                    "synonyms": ["deep", "intense"],
+                    "sentence1": "The book had a **profound** impact on its readers.",
+                    "sentence2": "The **intense** heat made it difficult to work outside."
+                },
+                {
+                    "english": "sustainable",
+                    "turkish": ["sürdürülebilir"],
+                    "synonyms": ["viable"],
+                    "sentence1": "The company focuses on **sustainable** energy solutions.",
+                    "sentence2": "The plan is **viable** only if we reduce costs."
+                },
+                {
+                    "english": "inherent",
+                    "turkish": ["doğal", "içkin"],
+                    "synonyms": ["intrinsic", "innate"],
+                    "sentence1": "The risks are **inherent** in any investment.",
+                    "sentence2": "The **intrinsic** value of the artifact is immeasurable."
+                },
+                {
+                    "english": "contamination",
+                    "turkish": ["kirlenme"],
+                    "synonyms": ["pollution"],
+                    "sentence1": "The water supply was affected by **contamination**.",
+                    "sentence2": "Air **pollution** is a major concern in urban areas."
+                },
+                {
+                    "english": "conservation",
+                    "turkish": ["koruma"],
+                    "synonyms": ["preservation"],
+                    "sentence1": "The **conservation** of wildlife is crucial for biodiversity.",
+                    "sentence2": "The **preservation** of historical sites is a priority."
+                },
+                {
+                    "english": "validity",
+                    "turkish": ["geçerlilik"],
+                    "synonyms": ["legitimacy"],
+                    "sentence1": "The **validity** of the contract was questioned.",
+                    "sentence2": "The **legitimacy** of the election results was confirmed."
+                },
+                {
+                    "english": "autonomous",
+                    "turkish": ["özerk"],
+                    "synonyms": ["self-governing"],
+                    "sentence1": "The region is **autonomous** and makes its own laws.",
+                    "sentence2": "The **self-governing** colony declared independence."
+                },
+                {
+                    "english": "transmission",
+                    "turkish": ["bulaşma", "iletim"],
+                    "synonyms": ["transfer"],
+                    "sentence1": "The **transmission** of the virus was rapid.",
+                    "sentence2": "The **transfer** of data was completed successfully."
+                },
+                {
+                    "english": "holistic",
+                    "turkish": ["bütüncül"],
+                    "synonyms": ["comprehensive"],
+                    "sentence1": "The doctor took a **holistic** approach to treatment.",
+                    "sentence2": "The **comprehensive** plan covered all aspects of the project."
+                },
+                {
+                    "english": "substantial",
+                    "turkish": ["kayda değer"],
+                    "synonyms": ["significant"],
+                    "sentence1": "The project received **substantial** funding.",
+                    "sentence2": "The discovery had a **significant** impact on the field."
+                },
+                {
+                    "english": "implementation",
+                    "turkish": ["uygulama"],
+                    "synonyms": ["application"],
+                    "sentence1": "The **implementation** of the new policy begins next month.",
+                    "sentence2": "The **application** of the theory proved successful."
+                },
+                {
+                    "english": "preliminary",
+                    "turkish": ["ön"],
+                    "synonyms": ["initial", "preparatory"],
+                    "sentence1": "The **preliminary** results were promising.",
+                    "sentence2": "The **initial** phase of the project is complete."
+                },
+                {
+                    "english": "coherent",
+                    "turkish": ["tutarlı"],
+                    "synonyms": ["logical", "consistent"],
+                    "sentence1": "The argument was **coherent** and well-structured.",
+                    "sentence2": "The theory is **logical** and supported by evidence."
+                },
+                {
+                    "english": "arbitrary",
+                    "turkish": ["keyfi"],
+                    "synonyms": ["random"],
+                    "sentence1": "The decision seemed **arbitrary** and unfair.",
+                    "sentence2": "The selection process was **random** and unbiased."
+                },
+                {
+                    "english": "concurrent",
+                    "turkish": ["eşzamanlı"],
+                    "synonyms": ["simultaneous"],
+                    "sentence1": "The two events were **concurrent** and caused confusion.",
+                    "sentence2": "The **simultaneous** broadcasts reached millions of viewers."
+                },
+                {
+                    "english": "implicit",
+                    "turkish": ["örtülü", "ima edilen"],
+                    "synonyms": ["implied"],
+                    "sentence1": "The agreement had **implicit** terms that were not stated.",
+                    "sentence2": "The message was **implied** rather than directly stated."
+                },
+                {
+                    "english": "robust",
+                    "turkish": ["sağlam"],
+                    "synonyms": ["strong", "sturdy"],
+                    "sentence1": "The **robust** design ensures durability.",
+                    "sentence2": "The **sturdy** bridge withstood the storm."
+                },
+                {
+                    "english": "obsolete",
+                    "turkish": ["eski"],
+                    "synonyms": ["outdated"],
+                    "sentence1": "The technology became **obsolete** within a few years.",
+                    "sentence2": "The **outdated** equipment was replaced."
+                },
+                {
+                    "english": "alleviate",
+                    "turkish": ["hafifletmek"],
+                    "synonyms": ["ease"],
+                    "sentence1": "The medicine helped **alleviate** the pain.",
+                    "sentence2": "The new policy aims to **ease** financial burdens."
+                },
+                {
+                    "english": "constitute",
+                    "turkish": ["oluşturmak"],
+                    "synonyms": ["make up"],
+                    "sentence1": "These elements **constitute** the core of the theory.",
+                    "sentence2": "The team **makes up** the best players in the league."
+                },
+                {
+                    "english": "unresolved",
+                    "turkish": ["çözümlenmemiş"],
+                    "synonyms": ["unsettled"],
+                    "sentence1": "The issue remains **unresolved** despite numerous discussions.",
+                    "sentence2": "The dispute is still **unsettled** and causing tension."
+                },
+                {
+                    "english": "revitalise",
+                    "turkish": ["canlandırmak"],
+                    "synonyms": ["rejuvenate"],
+                    "sentence1": "The new investment will **revitalise** the local economy.",
+                    "sentence2": "The spa treatment helped **rejuvenate** her skin."
+                },
+                {
+                    "english": "countless",
+                    "turkish": ["sayısız"],
+                    "synonyms": ["innumerable"],
+                    "sentence1": "The artist created **countless** masterpieces.",
+                    "sentence2": "The stars in the sky are **innumerable**."
+                },
+                {
+                    "english": "conventional",
+                    "turkish": ["geleneksel"],
+                    "synonyms": ["traditional"],
+                    "sentence1": "The **conventional** method is still widely used.",
+                    "sentence2": "The **traditional** ceremony was held annually."
+                },
+                {
+                    "english": "offspring",
+                    "turkish": ["yavru", "döl"],
+                    "synonyms": ["child", "descendant"],
+                    "sentence1": "The lioness protected her **offspring** from predators.",
+                    "sentence2": "The **descendant** of the royal family attended the event."
+                },
+                {
+                    "english": "heredity",
+                    "turkish": ["kalıtım"],
+                    "synonyms": ["inheritance"],
+                    "sentence1": "The disease is linked to **heredity**.",
+                    "sentence2": "The **inheritance** of traits is a key concept in biology."
+                },
+                {
+                    "english": "predisposed",
+                    "turkish": ["yatkın"],
+                    "synonyms": ["prone", "inclined"],
+                    "sentence1": "Some people are **predisposed** to certain illnesses.",
+                    "sentence2": "He is **inclined** to take risks in his investments."
+                },
+                {
+                    "english": "burden",
+                    "turkish": ["yük"],
+                    "synonyms": ["weight", "encumbrance"],
+                    "sentence1": "The financial **burden** was too much for the family.",
+                    "sentence2": "The **encumbrance** of debt affected his mental health."
+                },
+                {
+                    "english": "susceptible",
+                    "turkish": ["duyarlı"],
+                    "synonyms": ["vulnerable"],
+                    "sentence1": "Children are more **susceptible** to infections.",
+                    "sentence2": "The system is **vulnerable** to cyberattacks."
+                },
+                {
+                    "english": "exacerbation",
+                    "turkish": ["kötüleşme"],
+                    "synonyms": ["aggravation"],
+                    "sentence1": "The **exacerbation** of symptoms required immediate attention.",
+                    "sentence2": "The **aggravation** of the conflict led to violence."
+                },
+                {
+                    "english": "instantaneously",
+                    "turkish": ["anında"],
+                    "synonyms": ["at once"],
+                    "sentence1": "The reaction occurred **instantaneously**.",
+                    "sentence2": "The system responded **at once** to the command."
+                },
+                {
+                    "english": "impairment",
+                    "turkish": ["bozukluk"],
+                    "synonyms": ["disability"],
+                    "sentence1": "The accident caused a permanent **impairment**.",
+                    "sentence2": "The **disability** made it difficult for him to work."
+                },
+                {
+                    "english": "premise",
+                    "turkish": ["öncül"],
+                    "synonyms": ["assumption"],
+                    "sentence1": "The argument is based on a false **premise**.",
+                    "sentence2": "The **assumption** that all people are equal is fundamental."
+                },
+                {
+                    "english": "bizarre",
+                    "turkish": ["tuhaf"],
+                    "synonyms": ["weird", "peculiar"],
+                    "sentence1": "The **bizarre** behavior of the animal puzzled scientists.",
+                    "sentence2": "The **peculiar** sound came from the old house."
+                },
+                {
+                    "english": "heritable",
+                    "turkish": ["kalıtsal"],
+                    "synonyms": ["inheritable"],
+                    "sentence1": "The trait is **heritable** and passed down through generations.",
+                    "sentence2": "The disease is **inheritable** and affects many families."
+                },
+                {
+                    "english": "transient",
+                    "turkish": ["geçici"],
+                    "synonyms": ["temporary"],
+                    "sentence1": "The **transient** nature of fame is well-known.",
+                    "sentence2": "The **temporary** solution was implemented until further notice."
+                },
+                {
+                    "english": "discern",
+                    "turkish": ["ayırt etmek"],
+                    "synonyms": ["distinguish"],
+                    "sentence1": "It is difficult to **discern** the truth from the lies.",
+                    "sentence2": "The expert could **distinguish** the original from the copy."
+                },
+                {
+                    "english": "invasive",
+                    "turkish": ["istilacı"],
+                    "synonyms": ["intrusive", "aggressive"],
+                    "sentence1": "The **invasive** species disrupted the local ecosystem.",
+                    "sentence2": "The **intrusive** questions made her uncomfortable."
+                },
+                {
+                    "english": "plunge",
+                    "turkish": ["dalmak"],
+                    "synonyms": ["dive", "submerge"],
+                    "sentence1": "The diver took a deep **plunge** into the ocean.",
+                    "sentence2": "The submarine began to **submerge** beneath the waves."
+                },
+                {
+                    "english": "foresee",
+                    "turkish": ["öngörmek"],
+                    "synonyms": ["predict", "anticipate"],
+                    "sentence1": "It is difficult to **foresee** the outcome of the election.",
+                    "sentence2": "The economist **predicted** a rise in inflation."
+                },
+                {
+                    "english": "retention",
+                    "turkish": ["tutma", "alıkoyma"],
+                    "synonyms": ["include", "contain"],
+                    "sentence1": "The **retention** of employees is a priority for the company.",
+                    "sentence2": "The document should **contain** all relevant information."
+                },
+                {
+                    "english": "comprise",
+                    "turkish": ["içermek"],
+                    "synonyms": [],
+                    "sentence1": "The team **comprises** experts from various fields.",
+                    "sentence2": "The collection **comprises** over 100 rare artifacts."
+                },
+                {
+                    "english": "illiterate",
+                    "turkish": ["okuma yazma bilmeyen"],
+                    "synonyms": [],
+                    "sentence1": "Many adults in the region are **illiterate**.",
+                    "sentence2": "The program aims to reduce **illiterate** populations."
+                },
+                {
+                    "english": "forerunner",
+                    "turkish": ["öncü"],
+                    "synonyms": [],
+                    "sentence1": "The invention was a **forerunner** of modern technology.",
+                    "sentence2": "The **forerunner** of the movement was a visionary leader."
+                },
+                {
+                    "english": "adversely",
+                    "turkish": ["olumsuz olarak"],
+                    "synonyms": ["unfavorably"],
+                    "sentence1": "The decision affected the project **adversely**.",
+                    "sentence2": "The market reacted **unfavorably** to the news."
+                },
+                {
+                    "english": "unrivalled",
+                    "turkish": ["rakipsiz"],
+                    "synonyms": ["unequaled"],
+                    "sentence1": "The athlete's performance was **unrivalled**.",
+                    "sentence2": "The beauty of the landscape is **unequaled**."
+                },
+                {
+                    "english": "inanimate",
+                    "turkish": ["cansız", "hareketsiz"],
+                    "synonyms": ["lifeless", "inert"],
+                    "sentence1": "The **inanimate** object showed no signs of life.",
+                    "sentence2": "The **lifeless** body was found in the forest."
+                },
+                {
+                    "english": "gesture",
+                    "turkish": ["el kol hareketi"],
+                    "synonyms": [],
+                    "sentence1": "The **gesture** was meant to show goodwill.",
+                    "sentence2": "A simple **gesture** can convey a powerful message."
+                },
+                {
+                    "english": "phase",
+                    "turkish": ["evre"],
+                    "synonyms": ["stage"],
+                    "sentence1": "The project is in its final **phase**.",
+                    "sentence2": "The first **stage** of the plan was completed successfully."
+                },
+                {
+                    "english": "superficial",
+                    "turkish": ["yüzeysel"],
+                    "synonyms": ["shallow"],
+                    "sentence1": "The **superficial** analysis missed key details.",
+                    "sentence2": "The **shallow** understanding of the topic led to errors."
+                },
+                {
+                    "english": "dismally",
+                    "turkish": ["kasvetli bir şekilde"],
+                    "synonyms": ["gloomily"],
+                    "sentence1": "The team performed **dismally** in the competition.",
+                    "sentence2": "He looked **gloomily** at the empty room."
+                },
+                {
+                    "english": "outset",
+                    "turkish": ["başlangıç"],
+                    "synonyms": ["beginning", "start"],
+                    "sentence1": "From the **outset**, the project faced challenges.",
+                    "sentence2": "The **beginning** of the story was captivating."
+                },
+                {
+                    "english": "cherish",
+                    "turkish": ["değer vermek"],
+                    "synonyms": ["treasure", "value"],
+                    "sentence1": "She **cherished** the memories of her childhood.",
+                    "sentence2": "The family **treasures** the old photograph."
+                },
+                {
+                    "english": "former",
+                    "turkish": ["önceki"],
+                    "synonyms": ["previous"],
+                    "sentence1": "The **former** president attended the ceremony.",
+                    "sentence2": "The **previous** owner left the house in good condition."
+                },
+                {
+                    "english": "consolidate",
+                    "turkish": ["pekiştirmek"],
+                    "synonyms": [],
+                    "sentence1": "The company plans to **consolidate** its operations.",
+                    "sentence2": "The treaty helped **consolidate** peace in the region."
+                },
+                {
+                    "english": "reasoning",
+                    "turkish": ["akıl yürütme"],
+                    "synonyms": ["rationale"],
+                    "sentence1": "Her **reasoning** was logical and well-structured.",
+                    "sentence2": "The **rationale** behind the decision was explained."
+                },
+                {
+                    "english": "aptitude",
+                    "turkish": ["yetenek", "istidat"],
+                    "synonyms": ["capability"],
+                    "sentence1": "He showed a natural **aptitude** for mathematics.",
+                    "sentence2": "The **capability** of the machine is impressive."
+                },
+                {
+                    "english": "well-to-do",
+                    "turkish": ["varlıklı"],
+                    "synonyms": ["prosperous"],
+                    "sentence1": "The **well-to-do** family lived in a large mansion.",
+                    "sentence2": "The **prosperous** town attracted many investors."
+                },
+                {
+                    "english": "sanction",
+                    "turkish": ["yaptırım"],
+                    "synonyms": [],
+                    "sentence1": "The government imposed **sanctions** on the country.",
+                    "sentence2": "The **sanction** was meant to enforce compliance."
+                },
+                {
+                    "english": "implicitly",
+                    "turkish": ["üstü kapalı olarak"],
+                    "synonyms": ["indirectly"],
+                    "sentence1": "The message was **implicitly** conveyed through gestures.",
+                    "sentence2": "The criticism was **indirectly** stated in the report."
+                },
+                {
+                    "english": "famine",
+                    "turkish": ["kıtlık"],
+                    "synonyms": ["starvation"],
+                    "sentence1": "The region suffered from a severe **famine**.",
+                    "sentence2": "Many people died of **starvation** during the crisis."
+                },
+                {
+                    "english": "dynasty",
+                    "turkish": ["hanedan"],
+                    "synonyms": [],
+                    "sentence1": "The **dynasty** ruled the country for centuries.",
+                    "sentence2": "The **dynasty** was known for its cultural achievements."
+                },
+                {
+                    "english": "promptly",
+                    "turkish": ["derhal"],
+                    "synonyms": ["without delay"],
+                    "sentence1": "The issue was addressed **promptly** by the team.",
+                    "sentence2": "The response was sent **without delay**."
+                }
+            ]
+        }
+            ;
+
+        const colors = ['#FFCDD2', '#C8E6C9', '#BBDEFB', '#FFECB3', '#D1C4E9'];
+        const cardContainer = document.getElementById('cardContainer');
+        let currentIndex = 0;
+
+        function formatSentence(sentence) {
+            return sentence.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+        }
+
+        function createCard(wordObject) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            const english = document.createElement('h2');
+            english.textContent = wordObject.english;
+            card.appendChild(english);
+
+            const turkishTitle = document.createElement('h3');
+            turkishTitle.textContent = 'Türkçe';
+            card.appendChild(turkishTitle);
+
+            const turkishList = document.createElement('ul');
+            wordObject.turkish.forEach(turkishWord => {
+                const li = document.createElement('li');
+                li.textContent = turkishWord;
+                turkishList.appendChild(li);
+            });
+            card.appendChild(turkishList);
+
+            const synonymsTitle = document.createElement('h3');
+            synonymsTitle.textContent = 'Synonyms';
+            card.appendChild(synonymsTitle);
+
+            const synonymsList = document.createElement('ul');
+            wordObject.synonyms.forEach(synonym => {
+                const li = document.createElement('li');
+                li.textContent = synonym;
+                synonymsList.appendChild(li);
+            });
+            card.appendChild(synonymsList);
+
+            const sentence1 = document.createElement('p');
+            sentence1.innerHTML = formatSentence(wordObject.sentence1);
+            card.appendChild(sentence1);
+
+            const sentence2 = document.createElement('p');
+            sentence2.innerHTML = formatSentence(wordObject.sentence2);
+            card.appendChild(sentence2);
+
+            return card;
+        }
+
+        function loadMoreCards() {
+            const words = jsonData.words;
+            for (let i = 0; i < 10 && currentIndex < words.length; i++, currentIndex++) {
+                const card = createCard(words[currentIndex]);
+                cardContainer.appendChild(card);
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+                loadMoreCards();
+            }
+        });
+
+        loadMoreCards();
+    </script>
+</body>
+
+</html>
