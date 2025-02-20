@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Veri Kartları</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .card h3 {
+            margin: 10px 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="cardContainer"></div>
+    <script>
+        const jsonData = {
+            "words": [
+                {
+                    "english": "undertake",
+                    "turkish": ["tistlenmek", "üstüne almak"],
+                    "synonyms": ["take on"],
+                    " sentence1": "I decided to undertake the new project despite the risks.",
+                    " sentence2": "She was eager to take on the challenge."
+                },
+                {
+                    "english": "compel",
+                    "turkish": ["zorlamak"],
+                    "synonyms": ["force"],
+                    " sentence1": "The circumstances compel him to act quickly.",
+                    " sentence2": "The situation forced her to change her plans."
+                },
+                {
+                    "english": "hamper",
+                    "turkish": ["engellemek"],
+                    "synonyms": ["impair"],
+                    " sentence1": "Heavy traffic can hamper progress during rush hour.",
+                    " sentence2": "Unexpected obstacles may impair the project’s success."
+                },
+                {
+                    "english": "chase",
+                    "turkish": ["kovalamak"],
+                    "synonyms": ["run after"],
+                    " sentence1": "The dog began to chase the ball across the yard.",
+                    " sentence2": "Children often run after the ice cream truck on a hot day."
+                },
+                {
+                    "english": "perceive",
+                    "turkish": ["algılamak"],
+                    "synonyms": ["discern"],
+                    " sentence1": "We perceive changes in our environment through our senses.",
+                    " sentence2": "It can be difficult to discern the truth in a complex story."
+                },
+                {
+                    "english": "persecute",
+                    "turkish": ["zuimetmek"],
+                    "synonyms": ["oppress"],
+                    " sentence1": "History shows that some regimes persecute minorities.",
+                    " sentence2": "In the past, rulers often oppress those who dissent."
+                },
+                {
+                    "english": "jeopardise",
+                    "turkish": ["tehlikeye atmak"],
+                    "synonyms": ["endanger"],
+                    " sentence1": "Careless actions can jeopardise the entire mission.",
+                    " sentence2": "Ignoring safety protocols may endanger everyone's lives."
+                },
+                {
+                    "english": "excessive",
+                    "turkish": ["aşırı"],
+                    "synonyms": ["exorbitant"],
+                    " sentence1": "Her report contained excessive details that confused the audience.",
+                    " sentence2": "The charges were exorbitant and left everyone shocked."
+                },
+                {
+                    "english": "successive",
+                    "turkish": ["art arda", "ardışık"],
+                    "synonyms": ["consecutive"],
+                    " sentence1": "The team won three successive championships.",
+                    " sentence2": "He achieved consecutive wins throughout the season."
+                },
+                {
+                    "english": "current",
+                    "turkish": ["mevcut", "güncel"],
+                    "synonyms": ["present"],
+                    " sentence1": "The current situation requires immediate attention.",
+                    " sentence2": "We must address the present issues before they worsen."
+                },
+                {
+                    "english": "disturbance",
+                    "turkish": ["rahatsızlık"],
+                    "synonyms": ["disruption"],
+                    " sentence1": "A loud disturbance woke the entire neighborhood.",
+                    " sentence2": "The sudden disruption caused delays in the meeting."
+                },
+                {
+                    "english": "undergo",
+                    "turkish": ["maruz kalmak", "uğramak"],
+                    "synonyms": ["experience"],
+                    " sentence1": "Many patients undergo treatment for serious illnesses.",
+                    " sentence2": "He had to experience several tests before a diagnosis was confirmed."
+                },
+                {
+                    "english": "suitably",
+                    "turkish": ["uygun bir şekilde"],
+                    "synonyms": ["appropriately"],
+                    " sentence1": "The room was suitably decorated for the celebration.",
+                    " sentence2": "The instructions were appropriately followed by the team."
+                },
+                {
+                    "english": "unlikely",
+                    "turkish": ["olası olmayan"],
+                    "synonyms": ["improbable"],
+                    " sentence1": "It is unlikely that it will rain today.",
+                    " sentence2": "Given the forecast, such a storm seems improbable."
+                },
+                {
+                    "english": "abstain from",
+                    "turkish": ["sakınmak", "uzak durmak"],
+                    "synonyms": ["refrain from"],
+                    " sentence1": "Many people choose to abstain from junk food for better health.",
+                    " sentence2": "He decided to refrain from eating sweets during the diet."
+                },
+                {
+                    "english": "indefinitely",
+                    "turkish": ["süresiz olarak"],
+                    "synonyms": ["endlessly"],
+                    " sentence1": "The meeting has been postponed indefinitely.",
+                    " sentence2": "They waited endlessly for a decision to be made."
+                },
+                {
+                    "english": "reluctantly",
+                    "turkish": ["gönülsüz bir şekilde"],
+                    "synonyms": ["unwillingly"],
+                    " sentence1": "She reluctantly agreed to help with the project.",
+                    " sentence2": "He unwillingly accepted the invitation despite his reservations."
+                },
+                {
+                    "english": "accomplish",
+                    "turkish": ["başarmak"],
+                    "synonyms": ["achieve"],
+                    " sentence1": "They worked hard to accomplish their goals.",
+                    " sentence2": "With persistence, she was able to achieve success."
+                },
+                {
+                    "english": "dispose of",
+                    "turkish": ["kullanıp atmak"],
+                    "synonyms": ["discard"],
+                    " sentence1": "Please dispose of the waste properly.",
+                    " sentence2": "He decided to discard the old documents safely."
+                },
+                {
+                    "english": "decay",
+                    "turkish": ["çürümek"],
+                    "synonyms": ["rot"],
+                    " sentence1": "If left unattended, the building will decay over time.",
+                    " sentence2": "Fruits left in the sun will quickly rot."
+                },
+                {
+                    "english": "encounter",
+                    "turkish": ["karşılaşmak"],
+                    "synonyms": ["come across"],
+                    " sentence1": "During our hike, we may encounter wild animals.",
+                    " sentence2": "I came across an interesting article online."
+                },
+                {
+                    "english": "respectively",
+                    "turkish": ["sırası ile"],
+                    "synonyms": ["correspondingly"],
+                    " sentence1": "Alice and Bob received a score of 90 and 85, respectively.",
+                    " sentence2": "The prizes were distributed correspondingly to the winners."
+                },
+                {
+                    "english": "germinate",
+                    "turkish": ["çimlenmek"],
+                    "synonyms": ["sprout"],
+                    " sentence1": "Seeds need proper conditions to germinate.",
+                    " sentence2": "After a few days, the seeds began to sprout."
+                },
+                {
+                    "english": "vanish",
+                    "turkish": ["ortadan kaybolmak"],
+                    "synonyms": ["disappear"],
+                    " sentence1": "The magician made the coin vanish.",
+                    " sentence2": "The shadow seemed to disappear in the bright light."
+                },
+                {
+                    "english": "accompany",
+                    "turkish": ["eşlik etmek"],
+                    "synonyms": ["escort"],
+                    " sentence1": "I will accompany you to the concert.",
+                    " sentence2": "A guide was assigned to escort the visitors."
+                },
+                {
+                    "english": "expand",
+                    "turkish": ["genişle(t)mek"],
+                    "synonyms": ["enlarge"],
+                    " sentence1": "The company plans to expand its operations internationally.",
+                    " sentence2": "They intend to enlarge the business to new markets."
+                },
+                {
+                    "english": "commit",
+                    "turkish": ["yapmak", "adamak"],
+                    "synonyms": ["carry out"],
+                    " sentence1": "He will commit to the project once he reviews the details.",
+                    " sentence2": "They decided to carry out the plan despite the risks."
+                },
+                {
+                    "english": "participate in",
+                    "turkish": ["katılmak"],
+                    "synonyms": ["engage in"],
+                    " sentence1": "She loves to participate in community events.",
+                    " sentence2": "He chose to engage in volunteer work during the summer."
+                },
+                {
+                    "english": "justify",
+                    "turkish": ["doğrulamak", "haklı çıkarmak"],
+                    "synonyms": ["rationalize"],
+                    " sentence1": "The evidence was used to justify the decision.",
+                    " sentence2": "He tried to rationalize his actions despite criticism."
+                },
+                {
+                    "english": "decline",
+                    "turkish": ["azalmak", "reddetmek"],
+                    "synonyms": ["refuse"],
+                    " sentence1": "He had to decline the invitation due to a prior commitment.",
+                    " sentence2": "She decided to refuse the offer politely."
+                },
+                {
+                    "english": "certify",
+                    "turkish": ["(resmi olarak) belgelemek"],
+                    "synonyms": ["verify"],
+                    " sentence1": "The document was certified by an official.",
+                    " sentence2": "Experts were called to verify the authenticity of the report."
+                },
+                {
+                    "english": "undermine",
+                    "turkish": ["sabote etmek"],
+                    "synonyms": ["weaken"],
+                    " sentence1": "Gossip can undermine a person's reputation.",
+                    " sentence2": "Neglecting safety measures can weaken the structure."
+                },
+                {
+                    "english": "magnify",
+                    "turkish": ["(büyüteçle) büyütmek"],
+                    "synonyms": ["enlarge"],
+                    " sentence1": "The lens can magnify small details.",
+                    " sentence2": "Using a microscope can enlarge even the tiniest objects."
+                },
+                {
+                    "english": "enforce",
+                    "turkish": ["uygulatmak"],
+                    "synonyms": ["execute"],
+                    " sentence1": "Authorities enforce the law to maintain order.",
+                    " sentence2": "They were assigned to execute new regulations effectively."
+                },
+                {
+                    "english": "eliminate",
+                    "turkish": ["ortadan kaldırmak"],
+                    "synonyms": ["remove"],
+                    " sentence1": "We need to eliminate all unnecessary expenses.",
+                    " sentence2": "The company decided to remove outdated equipment."
+                },
+                {
+                    "english": "recognize",
+                    "turkish": ["tanımak"],
+                    "synonyms": ["acknowledge"],
+                    " sentence1": "It is important to recognize the efforts of every team member.",
+                    " sentence2": "They took time to acknowledge her contributions."
+                },
+                {
+                    "english": "underestimate",
+                    "turkish": ["küçümsemek", "hafife almak"],
+                    "synonyms": ["undervalue"],
+                    " sentence1": "Never underestimate the power of determination.",
+                    " sentence2": "It is easy to undervalue someone’s potential."
+                },
+                {
+                    "english": "emphasize",
+                    "turkish": ["vurgulamak"],
+                    "synonyms": ["highlight"],
+                    " sentence1": "The teacher will emphasize the importance of practice.",
+                    " sentence2": "She used bold text to highlight key points."
+                },
+                {
+                    "english": "withhold",
+                    "turkish": ["vermemek", "alıkoymak"],
+                    "synonyms": ["retain"],
+                    " sentence1": "He decided to withhold his opinion during the meeting.",
+                    " sentence2": "The company chose to retain important documents securely."
+                },
+                {
+                    "english": "interest",
+                    "turkish": ["ilgi", "faiz", "çıkar"],
+                    "synonyms": ["attract"],
+                    " sentence1": "The novel managed to interest a wide audience.",
+                    " sentence2": "Bright colors can attract the attention of passersby."
+                },
+                {
+                    "english": "remarkably",
+                    "turkish": ["dikkate değer bir şekilde"],
+                    "synonyms": ["exceptionally"],
+                    " sentence1": "The athlete performed remarkably in the finals.",
+                    " sentence2": "The project was completed exceptionally well."
+                },
+                {
+                    "english": "interpretation",
+                    "turkish": ["yorum"],
+                    "synonyms": ["explanation"],
+                    " sentence1": "Her interpretation of the poem was insightful.",
+                    " sentence2": "The professor provided a clear explanation of the theory."
+                },
+                {
+                    "english": "denial",
+                    "turkish": ["inkar"],
+                    "synonyms": ["refusal"],
+                    " sentence1": "His denial of the allegations was surprising.",
+                    " sentence2": "The manager's refusal to comment raised questions."
+                },
+                {
+                    "english": "issue",
+                    "turkish": ["sorun", "konu", "yayınlamak"],
+                    "synonyms": ["problem"],
+                    " sentence1": "The committee will issue a statement soon.",
+                    " sentence2": "We encountered a serious problem during the experiment."
+                },
+                {
+                    "english": "reference",
+                    "turkish": ["atıf", "gönderme"],
+                    "synonyms": ["citation"],
+                    " sentence1": "The paper included a reference to earlier studies.",
+                    " sentence2": "Please check the citation at the end of the article."
+                },
+                {
+                    "english": "considerably",
+                    "turkish": ["bir hayli", "epeyçe"],
+                    "synonyms": ["substantially"],
+                    " sentence1": "The costs increased considerably over the years.",
+                    " sentence2": "The revenue grew substantially after the campaign."
+                },
+                {
+                    "english": "reduce",
+                    "turkish": ["azaltmak"],
+                    "synonyms": ["decrease"],
+                    " sentence1": "We must reduce waste to protect the environment.",
+                    " sentence2": "They aim to decrease energy consumption through new policies."
+                },
+                {
+                    "english": "embark on",
+                    "turkish": ["başlamak", "girişmek"],
+                    "synonyms": ["begin"],
+                    " sentence1": "She decided to embark on a journey around the world.",
+                    " sentence2": "After graduation, he chose to begin a new career path."
+                },
+                {
+                    "english": "adequately",
+                    "turkish": ["yeterli bir şekilde"],
+                    "synonyms": ["sufficiently"],
+                    " sentence1": "The project was adequately funded.",
+                    " sentence2": "All participants were sufficiently prepared for the exam."
+                },
+                {
+                    "english": "tackle",
+                    "turkish": ["ilgilenmek", "çaresine bakmak"],
+                    "synonyms": ["address"],
+                    " sentence1": "The team will tackle the complex problem head-on.",
+                    " sentence2": "Officials need to address the issue before it escalates."
+                },
+                {
+                    "english": "notably",
+                    "turkish": ["özellikle"],
+                    "synonyms": ["especially"],
+                    " sentence1": "He is notably skilled in his profession.",
+                    " sentence2": "The report was especially detailed and informative."
+                },
+                {
+                    "english": "display",
+                    "turkish": ["göstermek"],
+                    "synonyms": ["show"],
+                    " sentence1": "The museum will display ancient artifacts.",
+                    " sentence2": "The presentation aimed to show the new product features."
+                },
+                {
+                    "english": "discretion",
+                    "turkish": ["tedbir", "ihtiyat"],
+                    "synonyms": ["judgment"],
+                    " sentence1": "Use discretion when sharing sensitive information.",
+                    " sentence2": "Her judgment was trusted in difficult situations."
+                },
+                {
+                    "english": "supplement to",
+                    "turkish": ["ek", "katkı", "ilâve"],
+                    "synonyms": ["add to"],
+                    " sentence1": "She provided a supplement to the main course.",
+                    " sentence2": "They decided to add to the existing data with new findings."
+                },
+                {
+                    "english": "accurately",
+                    "turkish": ["doğru bir şekilde"],
+                    "synonyms": ["exactly"],
+                    " sentence1": "The report was accurately completed.",
+                    " sentence2": "He measured the ingredients exactly as instructed."
+                },
+                {
+                    "english": "abolish",
+                    "turkish": ["ortadan kaldırmak"],
+                    "synonyms": ["eradicate"],
+                    " sentence1": "The government plans to abolish outdated laws.",
+                    " sentence2": "They hope to eradicate poverty through effective policies."
+                },
+                {
+                    "english": "ultimate",
+                    "turkish": ["nihai", "en son"],
+                    "synonyms": ["final"],
+                    " sentence1": "Winning the championship was the ultimate goal.",
+                    " sentence2": "The final decision rested with the committee."
+                },
+                {
+                    "english": "captivate",
+                    "turkish": ["büyülemek"],
+                    "synonyms": ["enthrall"],
+                    " sentence1": "The performance will captivate the audience.",
+                    " sentence2": "The storyteller managed to enthrall everyone with his tale."
+                },
+                {
+                    "english": "abbreviate",
+                    "turkish": ["kısaltmak", "özetlemek"],
+                    "synonyms": ["shorten"],
+                    " sentence1": "We often abbreviate long phrases in everyday language.",
+                    " sentence2": "It is common to shorten words for convenience."
+                },
+                {
+                    "english": "susceptible to",
+                    "turkish": ["savunmasız", "hassas"],
+                    "synonyms": ["prone to"],
+                    " sentence1": "Young children are susceptible to common colds.",
+                    " sentence2": "Elderly people are prone to seasonal infections."
+                },
+                {
+                    "english": "intention",
+                    "turkish": ["niyet"],
+                    "synonyms": ["purpose"],
+                    " sentence1": "Her intention was to help those in need.",
+                    " sentence2": "The purpose of the meeting was to discuss the new policy."
+                },
+                {
+                    "english": "previous",
+                    "turkish": ["önceki"],
+                    "synonyms": ["prior"],
+                    " sentence1": "He referred to his previous work during the interview.",
+                    " sentence2": "The prior records confirmed the findings."
+                },
+                {
+                    "english": "determine",
+                    "turkish": ["belirlemek"],
+                    "synonyms": ["decide"],
+                    " sentence1": "Scientists work hard to determine the causes of climate change.",
+                    " sentence2": "It took hours to decide on the best course of action."
+                },
+                {
+                    "english": "primarily",
+                    "turkish": ["temel olarak"],
+                    "synonyms": ["mainly"],
+                    " sentence1": "The book is primarily aimed at young adults.",
+                    " sentence2": "The audience was mainly interested in the topic."
+                },
+                {
+                    "english": "restore",
+                    "turkish": ["eski haline çevirmek"],
+                    "synonyms": ["recover"],
+                    " sentence1": "They plan to restore the old building.",
+                    " sentence2": "The museum is trying to recover ancient artifacts."
+                },
+                {
+                    "english": "maintain",
+                    "turkish": ["sürdürmek", "bakım yapmak", "iddia etmek"],
+                    "synonyms": ["preserve"],
+                    " sentence1": "It is essential to maintain a balanced diet.",
+                    " sentence2": "They work hard to preserve historical monuments."
+                },
+                {
+                    "english": "precisely",
+                    "turkish": ["tam olarak"],
+                    "synonyms": ["exactly"],
+                    " sentence1": "She described the location precisely.",
+                    " sentence2": "He knew exactly where to find the hidden door."
+                },
+                {
+                    "english": "implement",
+                    "turkish": ["uygulamaya koymak"],
+                    "synonyms": ["carry out"],
+                    " sentence1": "The company will implement the new strategy next month.",
+                    " sentence2": "They are ready to carry out the planned changes."
+                },
+                {
+                    "english": "withdraw",
+                    "turkish": ["geri çekilmek"],
+                    "synonyms": ["retreat"],
+                    " sentence1": "He decided to withdraw his application.",
+                    " sentence2": "Due to the conflict, the troops had to retreat."
+                },
+                {
+                    "english": "acknowledge",
+                    "turkish": ["kabul etmek"],
+                    "synonyms": ["admit"],
+                    " sentence1": "She will acknowledge the contributions of her team.",
+                    " sentence2": "He had to admit that the error was his fault."
+                },
+                {
+                    "english": "tightly",
+                    "turkish": ["sıkı bir şekilde"],
+                    "synonyms": ["firmly"],
+                    " sentence1": "The lid was tightly secured on the jar.",
+                    " sentence2": "They held the rope firmly during the climb."
+                },
+                {
+                    "english": "determination",
+                    "turkish": ["kararlılık"],
+                    "synonyms": ["resolve"],
+                    " sentence1": "Her determination helped her overcome obstacles.",
+                    " sentence2": "With resolve, he pursued his dreams relentlessly."
+                },
+                {
+                    "english": "substantial",
+                    "turkish": ["epeyçe", "önemli", "büyük"],
+                    "synonyms": ["significant"],
+                    " sentence1": "They made a substantial investment in the startup.",
+                    " sentence2": "There was a significant increase in profits last quarter."
+                },
+                {
+                    "english": "improvement",
+                    "turkish": ["iyileşme"],
+                    "synonyms": ["enhancement"],
+                    " sentence1": "The new policies led to noticeable improvement in performance.",
+                    " sentence2": "The upgrade resulted in a marked enhancement of the system."
+                },
+                {
+                    "english": "scrutinize",
+                    "turkish": ["detaylı incelemek", "aramak"],
+                    "synonyms": ["examine"],
+                    " sentence1": "Experts will scrutinize the data before drawing conclusions.",
+                    " sentence2": "The auditor will examine the financial records thoroughly."
+                },
+                {
+                    "english": "vulnerable",
+                    "turkish": ["savunmasız", "hassas"],
+                    "synonyms": ["exposed"],
+                    " sentence1": "The animal is vulnerable in the wild.",
+                    " sentence2": "Without protection, the structure remained exposed to damage."
+                },
+                {
+                    "english": "redundancy",
+                    "turkish": ["gereksizlik", "fazlalık"],
+                    "synonyms": ["excess"],
+                    " sentence1": "The article explained the redundancy in the system.",
+                    " sentence2": "We need to cut the excess in our workforce."
+                },
+                {
+                    "english": "extremely",
+                    "turkish": ["aşırı bir şekilde"],
+                    "synonyms": ["incredibly"],
+                    " sentence1": "The weather was extremely cold last night.",
+                    " sentence2": "The performance was incredibly impressive."
+                },
+                {
+                    "english": "sustain",
+                    "turkish": ["sürdürmek", "desteklemek"],
+                    "synonyms": ["uphold"],
+                    " sentence1": "It is challenging to sustain high levels of energy.",
+                    " sentence2": "They strive to uphold quality standards consistently."
+                },
+                {
+                    "english": "quarrel",
+                    "turkish": ["tartışmak"],
+                    "synonyms": ["have a row"],
+                    " sentence1": "The siblings often quarrel over trivial matters.",
+                    " sentence2": "They had a row over who should do the chores."
+                },
+                {
+                    "english": "recurrent",
+                    "turkish": ["yeniden olan", "nükseden"],
+                    "synonyms": ["repeated"],
+                    " sentence1": "The doctor noted a recurrent pattern in the symptoms.",
+                    " sentence2": "The error was repeated several times during the test."
+                },
+                {
+                    "english": "handle",
+                    "turkish": ["ele almak", "taşımak"],
+                    "synonyms": ["manage"],
+                    " sentence1": "She can handle multiple tasks at once.",
+                    " sentence2": "He learned to manage the stressful situation efficiently."
+                },
+                {
+                    "english": "provide",
+                    "turkish": ["sağlamak"],
+                    "synonyms": ["supply"],
+                    " sentence1": "The organization aims to provide food for the needy.",
+                    " sentence2": "The factory was able to supply enough products for the demand."
+                },
+                {
+                    "english": "subsequent",
+                    "turkish": ["sonraki", "sonra gelen"],
+                    "synonyms": ["following"],
+                    " sentence1": "The subsequent events were even more surprising.",
+                    " sentence2": "The following day brought unexpected challenges."
+                },
+                {
+                    "english": "relative",
+                    "turkish": ["göreceli"],
+                    "synonyms": ["comparable"],
+                    " sentence1": "Her performance was impressive relative to her peers.",
+                    " sentence2": "The results were comparable to previous studies."
+                },
+                {
+                    "english": "validate",
+                    "turkish": ["geçerli kılmak"],
+                    "synonyms": ["confirm"],
+                    " sentence1": "The study helps validate the new theory.",
+                    " sentence2": "The experiment was designed to confirm the hypothesis."
+                },
+                {
+                    "english": "seek",
+                    "turkish": ["çabalamak", "aramak"],
+                    "synonyms": ["search for"],
+                    " sentence1": "Many travelers seek adventure during their vacations.",
+                    " sentence2": "She decided to search for new opportunities abroad."
+                },
+                {
+                    "english": "benefit from",
+                    "turkish": ["…den faydalanmak"],
+                    "synonyms": ["profit from"],
+                    " sentence1": "Students can benefit from extra tutoring sessions.",
+                    " sentence2": "Local businesses may profit from increased tourism."
+                },
+                {
+                    "english": "obsession",
+                    "turkish": ["takıntı"],
+                    "synonyms": ["fixation"],
+                    " sentence1": "His obsession with details was evident in his work.",
+                    " sentence2": "The artist's fixation on perfection influenced his creations."
+                },
+                {
+                    "english": "imitate",
+                    "turkish": ["taklit etmek"],
+                    "synonyms": ["emulate"],
+                    " sentence1": "Children often imitate the behavior of their parents.",
+                    " sentence2": "Aspiring artists try to emulate the styles of their idols."
+                },
+                {
+                    "english": "sensitively",
+                    "turkish": ["hassas bir şekilde"],
+                    "synonyms": ["delicately"],
+                    " sentence1": "She handled the delicate topic sensitively.",
+                    " sentence2": "He approached the criticism very delicately."
+                },
+                {
+                    "english": "obstruct",
+                    "turkish": ["engellemek", "tıkamak"],
+                    "synonyms": ["block"],
+                    " sentence1": "Fallen trees can obstruct the road after a storm.",
+                    " sentence2": "The debris managed to block the traffic completely."
+                },
+                {
+                    "english": "admission",
+                    "turkish": ["giriş ücreti", "kabul etme"],
+                    "synonyms": ["acceptance"],
+                    " sentence1": "The museum charges an admission fee at the entrance.",
+                    " sentence2": "Her acceptance into the program was celebrated by everyone."
+                },
+                {
+                    "english": "solely",
+                    "turkish": ["sadece"],
+                    "synonyms": ["only"],
+                    " sentence1": "The project was solely funded by private donors.",
+                    " sentence2": "They relied only on their savings for the purchase."
+                },
+                {
+                    "english": "scatter",
+                    "turkish": ["saçmak", "etrafa dağıtmak"],
+                    "synonyms": ["disperse"],
+                    " sentence1": "The wind will scatter the leaves across the yard.",
+                    " sentence2": "The crowd began to disperse after the concert ended."
+                },
+                {
+                    "english": "decompose",
+                    "turkish": ["çürümek"],
+                    "synonyms": ["rot"],
+                    " sentence1": "Organic matter will decompose over time if not preserved.",
+                    " sentence2": "Without proper storage, the food will quickly rot."
+                },
+                {
+                    "english": "conduct",
+                    "turkish": ["yapmak", "yönetmek", "iletmek"],
+                    "synonyms": ["carry out"],
+                    " sentence1": "The researcher will conduct the experiment tomorrow.",
+                    " sentence2": "They plan to carry out a survey next week."
+                },
+                {
+                    "english": "deliver",
+                    "turkish": ["dağıtmak", "teslim etmek"],
+                    "synonyms": ["distribute"],
+                    " sentence1": "The courier will deliver the package by noon.",
+                    " sentence2": "Volunteers were asked to distribute supplies to those in need."
+                },
+                {
+                    "english": "hesitate",
+                    "turkish": ["tereddüt etmek"],
+                    "synonyms": ["waver"],
+                    " sentence1": "Don't hesitate to ask questions during the meeting.",
+                    " sentence2": "She began to waver when making a difficult decision."
+                },
+                {
+                    "english": "attribute to",
+                    "turkish": ["arbetmek", "ilişkilendirmek"],
+                    "synonyms": ["ascribe to"],
+                    " sentence1": "Many attribute to his success his hard work.",
+                    " sentence2": "Scholars often ascribe to the theory based on empirical evidence."
+                }
+            ]
+        };
+
+        const colors = ['#FFCDD2', '#C8E6C9', '#BBDEFB', '#FFECB3', '#D1C4E9'];
+        const cardContainer = document.getElementById('cardContainer');
+        let currentIndex = 0;
+
+        /**
+         * Cümledeki ** işaretli kısımları <b> etiketiyle değiştirir.
+         * Eğer ** ile biçimlendirme yoksa, 'keyword' (english değeri) varsa
+         * cümlede ilk eşleşeni bold yapar.
+         */
+        function formatSentence(sentence, keyword) {
+            let formatted = sentence.replace(/\*\*(.*?)\*\*/g, '<b>$1</b>');
+            if (formatted === sentence && keyword) {
+                const regex = new RegExp(`\\b(${keyword})\\b`, 'i');
+                formatted = formatted.replace(regex, '<b>$1</b>');
+            }
+            return formatted;
+        }
+
+        function createCard(wordObject) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            const englishElem = document.createElement('h2');
+            englishElem.textContent = wordObject.english;
+            card.appendChild(englishElem);
+
+            const turkishTitle = document.createElement('h3');
+            turkishTitle.textContent = 'Türkçe';
+            card.appendChild(turkishTitle);
+
+            const turkishList = document.createElement('ul');
+            wordObject.turkish.forEach(turkishWord => {
+                const li = document.createElement('li');
+                li.textContent = turkishWord;
+                turkishList.appendChild(li);
+            });
+            card.appendChild(turkishList);
+
+            const synonymsTitle = document.createElement('h3');
+            synonymsTitle.textContent = 'Synonyms';
+            card.appendChild(synonymsTitle);
+
+            const synonymsList = document.createElement('ul');
+            wordObject.synonyms.forEach(synonym => {
+                const li = document.createElement('li');
+                li.textContent = synonym;
+                synonymsList.appendChild(li);
+            });
+            card.appendChild(synonymsList);
+
+            // JSON verilerindeki cümle anahtarları " sentence1" ve " sentence2" şeklinde olduğu için bu şekilde erişiyoruz.
+            const sentence1 = document.createElement('p');
+            sentence1.innerHTML = formatSentence(wordObject[" sentence1"], wordObject.english);
+            card.appendChild(sentence1);
+
+            const sentence2 = document.createElement('p');
+            sentence2.innerHTML = formatSentence(wordObject[" sentence2"], wordObject.english);
+            card.appendChild(sentence2);
+
+            return card;
+        }
+
+        function loadMoreCards() {
+            const words = jsonData.words;
+            for (let i = 0; i < 10 && currentIndex < words.length; i++, currentIndex++) {
+                const card = createCard(words[currentIndex]);
+                cardContainer.appendChild(card);
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+                loadMoreCards();
+            }
+        });
+
+        loadMoreCards();
+    </script>
+</body>
+
+</html>

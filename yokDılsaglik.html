@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Veri Kartları</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="cardContainer"></div>
+    <script>
+        const jsonData = {
+            "words": [
+                {
+                    "english": "abrupt",
+                    "turkish": ["ani", "keskin"],
+                    "synonyms": ["sudden", "unexpected", "sharp"]
+                },
+                {
+                    "english": "absolute",
+                    "turkish": ["mutlak", "kesin"],
+                    "synonyms": ["complete", "total", "unconditional"]
+                },
+                {
+                    "english": "absorb",
+                    "turkish": ["emmek", "özümsemek"],
+                    "synonyms": ["soak up", "assimilate", "take in"]
+                },
+                {
+                    "english": "account",
+                    "turkish": ["hesap", "açıklama"],
+                    "synonyms": ["report", "record", "narrative"]
+                },
+                {
+                    "english": "account for",
+                    "turkish": ["açıklamak", "hesap etmek"],
+                    "synonyms": ["explain", "justify", "clarify"]
+                },
+                {
+                    "english": "accurate",
+                    "turkish": ["doğru", "kesin"],
+                    "synonyms": ["precise", "exact", "correct"]
+                },
+                {
+                    "english": "acute",
+                    "turkish": ["şiddetli", "keskin", "akut"],
+                    "synonyms": ["severe", "intense", "sharp"]
+                },
+                {
+                    "english": "adequate",
+                    "turkish": ["yeterli", "uygun"],
+                    "synonyms": ["sufficient", "enough", "ample"]
+                },
+                {
+                    "english": "adjust",
+                    "turkish": ["ayar yapmak", "uyum sağlamak"],
+                    "synonyms": ["modify", "adapt", "alter"]
+                },
+                {
+                    "english": "administer",
+                    "turkish": ["idare etmek", "yönetmek"],
+                    "synonyms": ["manage", "execute", "oversee"]
+                },
+                {
+                    "english": "admission",
+                    "turkish": ["kabul", "giriş"],
+                    "synonyms": ["entrance", "entry", "acknowledgment"]
+                },
+                {
+                    "english": "adverse",
+                    "turkish": ["olumsuz", "münferit"],
+                    "synonyms": ["unfavorable", "hostile", "negative"]
+                },
+                {
+                    "english": "advice",
+                    "turkish": ["tavsiye", "öneri"],
+                    "synonyms": ["recommendation", "counsel", "guidance"]
+                },
+                {
+                    "english": "alien",
+                    "turkish": ["yabancı", "uzaylı"],
+                    "synonyms": ["foreign", "strange", "unfamiliar"]
+                },
+                {
+                    "english": "alleviate",
+                    "turkish": ["hafifletmek", "azaltmak"],
+                    "synonyms": ["ease", "reduce", "mitigate"]
+                },
+                {
+                    "english": "allowance",
+                    "turkish": ["harçlık", "izin"],
+                    "synonyms": ["stipend", "allocation", "permission"]
+                },
+                {
+                    "english": "alternative",
+                    "turkish": ["alternatif", "seçenek"],
+                    "synonyms": ["option", "substitute", "choice"]
+                },
+                {
+                    "english": "apparent",
+                    "turkish": ["bariz", "açık"],
+                    "synonyms": ["obvious", "clear", "evident"]
+                },
+                {
+                    "english": "application",
+                    "turkish": ["uygulama", "başvuru"],
+                    "synonyms": ["use", "program", "implementation"]
+                },
+                {
+                    "english": "approach",
+                    "turkish": ["yaklaşım", "yaklaşmak"],
+                    "synonyms": ["method", "strategy", "tactic"]
+                },
+                {
+                    "english": "appropriate",
+                    "turkish": ["uygun", "yerinde"],
+                    "synonyms": ["suitable", "proper", "fitting"]
+                },
+                {
+                    "english": "approval",
+                    "turkish": ["onay", "tasdik"],
+                    "synonyms": ["consent", "endorsement", "acceptance"]
+                },
+                {
+                    "english": "arise",
+                    "turkish": ["meydana gelmek", "ortaya çıkmak"],
+                    "synonyms": ["emerge", "occur", "originate"]
+                },
+                {
+                    "english": "arouse",
+                    "turkish": ["uyandırmak", "harekete geçirmek"],
+                    "synonyms": ["stimulate", "excite", "provoke"]
+                },
+                {
+                    "english": "association",
+                    "turkish": ["birlik", "dernek"],
+                    "synonyms": ["organization", "society", "connection"]
+                },
+                {
+                    "english": "attentive",
+                    "turkish": ["dikkatli", "özenli"],
+                    "synonyms": ["observant", "alert", "mindful"]
+                },
+                {
+                    "english": "attractive",
+                    "turkish": ["çekici", "hoş"],
+                    "synonyms": ["appealing", "lovely", "engaging"]
+                },
+                {
+                    "english": "attribute",
+                    "turkish": ["özellik", "nitelik"],
+                    "synonyms": ["quality", "characteristic", "trait"]
+                },
+                {
+                    "english": "autonomous",
+                    "turkish": ["özerk", "bağımsız"],
+                    "synonyms": ["independent", "self-governing", "self-reliant"]
+                },
+                {
+                    "english": "available",
+                    "turkish": ["mevcut", "ulaşılabilir"],
+                    "synonyms": ["accessible", "obtainable", "ready"]
+                },
+                {
+                    "english": "avoid",
+                    "turkish": ["kaçınmak", "sakınmak"],
+                    "synonyms": ["shun", "evade", "escape"]
+                },
+                {
+                    "english": "back up",
+                    "turkish": ["desteklemek", "yedeklemek"],
+                    "synonyms": ["support", "reinforce", "confirm"]
+                },
+                {
+                    "english": "back up with",
+                    "turkish": ["desteklemek", "kanıtlamak"],
+                    "synonyms": ["substantiate", "validate", "corroborate"]
+                },
+                {
+                    "english": "benefit",
+                    "turkish": ["yarar", "fayda"],
+                    "synonyms": ["advantage", "profit", "gain"]
+                },
+                {
+                    "english": "benign",
+                    "turkish": ["iyi huylu", "zararsız"],
+                    "synonyms": ["harmless", "mild", "favorable"]
+                },
+                {
+                    "english": "break down",
+                    "turkish": ["bozulmak", "parçalanmak"],
+                    "synonyms": ["collapse", "fail", "decompose"]
+                },
+                {
+                    "english": "break into",
+                    "turkish": ["zorla girmek", "bölmek"],
+                    "synonyms": ["infiltrate", "enter", "intrude"]
+                },
+                {
+                    "english": "break up",
+                    "turkish": ["dağılmak", "ayrılmak"],
+                    "synonyms": ["disperse", "separate", "split"]
+                },
+                {
+                    "english": "bring about",
+                    "turkish": ["meydana getirmek", "neden olmak"],
+                    "synonyms": ["cause", "effect", "generate"]
+                },
+                {
+                    "english": "bring forth",
+                    "turkish": ["ortaya çıkarmak", "vermek"],
+                    "synonyms": ["produce", "yield", "generate"]
+                },
+                {
+                    "english": "bring in",
+                    "turkish": ["getirmek", "kazandırmak"],
+                    "synonyms": ["introduce", "generate", "earn"]
+                },
+                {
+                    "english": "bring through",
+                    "turkish": ["başarmak", "atlatmak"],
+                    "synonyms": ["help", "see through", "complete"]
+                },
+                {
+                    "english": "bring up",
+                    "turkish": ["yetiştirmek", "gündeme getirmek"],
+                    "synonyms": ["raise", "mention", "introduce"]
+                },
+                {
+                    "english": "build up",
+                    "turkish": ["biriktirmek", "arttırmak"],
+                    "synonyms": ["accumulate", "increase", "strengthen"]
+                },
+                {
+                    "english": "care",
+                    "turkish": ["önem vermek", "ilgi"],
+                    "synonyms": ["attention", "concern", "consideration"]
+                },
+                {
+                    "english": "care for",
+                    "turkish": ["ilgilenmek", "bakmak"],
+                    "synonyms": ["look after", "tend", "nurture"]
+                },
+                {
+                    "english": "careful",
+                    "turkish": ["dikkatli", "özenli"],
+                    "synonyms": ["cautious", "vigilant", "meticulous"]
+                },
+                {
+                    "english": "carry out",
+                    "turkish": ["gerçekleştirmek", "uygulamak"],
+                    "synonyms": ["execute", "perform", "implement"]
+                },
+                {
+                    "english": "catch up",
+                    "turkish": ["yakalamak", "haberdar olmak"],
+                    "synonyms": ["keep up", "follow", "overtake"]
+                },
+                {
+                    "english": "cautious",
+                    "turkish": ["dikkatli", "temkinli"],
+                    "synonyms": ["careful", "wary", "prudent"]
+                },
+                {
+                    "english": "challenge",
+                    "turkish": ["meydan okumak", "zorluk"],
+                    "synonyms": ["contest", "defy", "test"]
+                },
+                {
+                    "english": "change",
+                    "turkish": ["değiştirmek", "değişim"],
+                    "synonyms": ["alter", "modify", "transform"]
+                },
+                {
+                    "english": "chronic",
+                    "turkish": ["kronik", "sürekli"],
+                    "synonyms": ["persistent", "long-term", "recurring"]
+                },
+                {
+                    "english": "clear out",
+                    "turkish": ["boşaltmak", "temizlemek"],
+                    "synonyms": ["empty", "evacuate", "remove"]
+                },
+                {
+                    "english": "close",
+                    "turkish": ["kapatmak", "yakın"],
+                    "synonyms": ["shut", "near", "tight"]
+                },
+                {
+                    "english": "collective",
+                    "turkish": ["toplu", "ortak"],
+                    "synonyms": ["group", "joint", "combined"]
+                },
+                {
+                    "english": "come across",
+                    "turkish": ["rastlamak", "karşılaşmak"],
+                    "synonyms": ["encounter", "find", "meet"]
+                },
+                {
+                    "english": "come up with",
+                    "turkish": ["bulmak", "öneri sunmak"],
+                    "synonyms": ["devise", "think of", "invent"]
+                },
+                {
+                    "english": "comfortable",
+                    "turkish": ["rahat", "konforlu"],
+                    "synonyms": ["cozy", "content", "relaxed"]
+                },
+                {
+                    "english": "comment",
+                    "turkish": ["yorum yapmak", "açıklama"],
+                    "synonyms": ["remark", "observe", "note"]
+                },
+                {
+                    "english": "communicate",
+                    "turkish": ["iletişim kurmak", "bildirmek"],
+                    "synonyms": ["convey", "express", "interact"]
+                },
+                {
+                    "english": "compare",
+                    "turkish": ["karşılaştırmak", "benzetmek"],
+                    "synonyms": ["contrast", "match", "liken"]
+                },
+                {
+                    "english": "compatible",
+                    "turkish": ["uyumlu", "tutumlu"],
+                    "synonyms": ["harmonious", "consistent", "congruent"]
+                },
+                {
+                    "english": "compensate",
+                    "turkish": ["telafi etmek", "ödemek"],
+                    "synonyms": ["reimburse", "repay", "offset"]
+                },
+                {
+                    "english": "competitive",
+                    "turkish": ["rekabetçi", "yarışmacı"],
+                    "synonyms": ["rivalrous", "ambitious", "cutthroat"]
+                },
+                {
+                    "english": "complacent",
+                    "turkish": ["kendini beğenmiş", "meme"],
+                    "synonyms": ["self-satisfied", "smug", "content"]
+                },
+                {
+                    "english": "component",
+                    "turkish": ["bileşen", "parça"],
+                    "synonyms": ["element", "part", "constituent"]
+                },
+                {
+                    "english": "comprehensive",
+                    "turkish": ["kapsamlı", "geniş"],
+                    "synonyms": ["extensive", "complete", "thorough"]
+                },
+                {
+                    "english": "compromised",
+                    "turkish": ["tehlikeye atılmış", "zayıflatılmış"],
+                    "synonyms": ["weakened", "jeopardized", "undermined"]
+                },
+                {
+                    "english": "compulsive",
+                    "turkish": ["zorlayıcı", "kontrol edilemeyen"],
+                    "synonyms": ["obsessive", "uncontrollable", "involuntary"]
+                },
+                {
+                    "english": "conclude",
+                    "turkish": ["sonuçlandırmak", "sonuç çıkarmak"],
+                    "synonyms": ["finish", "end", "deduce"]
+                },
+                {
+                    "english": "condition",
+                    "turkish": ["koşul", "durum"],
+                    "synonyms": ["state", "situation", "term"]
+                },
+                {
+                    "english": "confident",
+                    "turkish": ["kendine güvenen", "emin"],
+                    "synonyms": ["self-assured", "positive", "certain"]
+                },
+                {
+                    "english": "confirm",
+                    "turkish": ["onaylamak", "tespit etmek"],
+                    "synonyms": ["verify", "validate", "corroborate"]
+                },
+                {
+                    "english": "connect",
+                    "turkish": ["bağlamak", "iletişim kurmak"],
+                    "synonyms": ["link", "join", "relate"]
+                },
+                {
+                    "english": "conscious",
+                    "turkish": ["bilinçli", "farkında"],
+                    "synonyms": ["aware", "mindful", "sentient"]
+                },
+                {
+                    "english": "consecutive",
+                    "turkish": ["ardışık", "peş peşe"],
+                    "synonyms": ["successive", "sequential", "continuous"]
+                },
+                {
+                    "english": "consequent",
+                    "turkish": ["sonuç olarak", "ardıl"],
+                    "synonyms": ["resulting", "following", "subsequent"]
+                },
+                {
+                    "english": "consider",
+                    "turkish": ["düşünmek", "değerlendirmek"],
+                    "synonyms": ["ponder", "reflect", "examine"]
+                },
+                {
+                    "english": "consistent",
+                    "turkish": ["tutarlı", "istikrarlı"],
+                    "synonyms": ["steady", "reliable", "uniform"]
+                },
+                {
+                    "english": "consult",
+                    "turkish": ["danışmak", "görüşmek"],
+                    "synonyms": ["seek advice", "confer", "discuss"]
+                },
+                {
+                    "english": "contagious",
+                    "turkish": ["bulaşıcı", "yaygın"],
+                    "synonyms": ["infectious", "catching", "communicable"]
+                },
+                {
+                    "english": "continual",
+                    "turkish": ["sürekli", "ardışık"],
+                    "synonyms": ["constant", "repeated", "persistent"]
+                },
+                {
+                    "english": "contract",
+                    "turkish": ["sözleşme", "daralmak"],
+                    "synonyms": ["agreement", "compact", "shrink"]
+                },
+                {
+                    "english": "contribute",
+                    "turkish": ["katkıda bulunmak", "eklemek"],
+                    "synonyms": ["donate", "provide", "supply"]
+                },
+                {
+                    "english": "convert",
+                    "turkish": ["dönüştürmek", "çevirmek"],
+                    "synonyms": ["transform", "change", "transmute"]
+                },
+                {
+                    "english": "convince",
+                    "turkish": ["ikna etmek", "inanmak"],
+                    "synonyms": ["persuade", "sway", "assure"]
+                },
+                {
+                    "english": "correspond",
+                    "turkish": ["yazışmak", "uyuşmak"],
+                    "synonyms": ["match", "agree", "coincide"]
+                },
+                {
+                    "english": "count on",
+                    "turkish": ["güvenmek", "dayanmak"],
+                    "synonyms": ["rely on", "depend on", "trust"]
+                },
+                {
+                    "english": "crucial",
+                    "turkish": ["çok önemli", "kritik"],
+                    "synonyms": ["vital", "essential", "critical"]
+                },
+                {
+                    "english": "cure",
+                    "turkish": ["tedavi etmek", "iyileştirmek"],
+                    "synonyms": ["heal", "remedy", "treat"]
+                },
+                {
+                    "english": "cut off",
+                    "turkish": ["kesmek", "ayırlamak"],
+                    "synonyms": ["disconnect", "sever", "isolate"]
+                },
+                {
+                    "english": "dangerous",
+                    "turkish": ["tehlikeli", "zararlı"],
+                    "synonyms": ["hazardous", "risky", "perilous"]
+                },
+                {
+                    "english": "decay",
+                    "turkish": ["çürüme", "bozulma"],
+                    "synonyms": ["rot", "decompose", "deteriorate"]
+                },
+                {
+                    "english": "deceptive",
+                    "turkish": ["aldatıcı", "yanıltıcı"],
+                    "synonyms": ["misleading", "fraudulent", "tricky"]
+                },
+                {
+                    "english": "decisive",
+                    "turkish": ["karar verici", "kesin"],
+                    "synonyms": ["determined", "resolute", "conclusive"]
+                },
+                {
+                    "english": "decline",
+                    "turkish": ["reddetmek", "azalmak"],
+                    "synonyms": ["decrease", "diminish", "refuse"]
+                },
+                {
+                    "english": "deduce",
+                    "turkish": ["sonuç çıkarmak", "çıkarım yapmak"],
+                    "synonyms": ["infer", "derive", "conclude"]
+                },
+                {
+                    "english": "deduct",
+                    "turkish": ["çıkarma", "indirim yapmak"],
+                    "synonyms": ["subtract", "take away", "remove"]
+                },
+                {
+                    "english": "defect",
+                    "turkish": ["kusur", "hata"],
+                    "synonyms": ["flaw", "imperfection", "fault"]
+                },
+                {
+                    "english": "deficient",
+                    "turkish": ["eksik", "yetersiz"],
+                    "synonyms": ["insufficient", "lacking", "inadequate"]
+                },
+                {
+                    "english": "deficit",
+                    "turkish": ["açık", "eksiklik"],
+                    "synonyms": ["shortfall", "deficiency", "lack"]
+                },
+                {
+                    "english": "degenerate",
+                    "turkish": ["bozulmuş", "çürümüş"],
+                    "synonyms": ["degraded", "declined", "deteriorated"]
+                },
+                {
+                    "english": "degrade",
+                    "turkish": ["aşağılamak", "bozmak"],
+                    "synonyms": ["demean", "debase", "deteriorate"]
+                },
+                {
+                    "english": "degree",
+                    "turkish": ["derece", "seviyye"],
+                    "synonyms": ["extent", "level", "magnitude"]
+                },
+                {
+                    "english": "deliver",
+                    "turkish": ["teslim etmek", "ulaştırmak"],
+                    "synonyms": ["distribute", "convey", "provide"]
+                },
+                {
+                    "english": "demand",
+                    "turkish": ["talep etmek", "gereksinim"],
+                    "synonyms": ["require", "insist", "command"]
+                },
+                {
+                    "english": "denial",
+                    "turkish": ["reddetme", "inkar"],
+                    "synonyms": ["refusal", "rejection", "disavowal"]
+                },
+                {
+                    "english": "depend",
+                    "turkish": ["bağlı olmak", "dayanmak"],
+                    "synonyms": ["rely on", "count on", "trust"]
+                },
+                {
+                    "english": "destroy",
+                    "turkish": ["yok etmek", "tahrip etmek"],
+                    "synonyms": ["demolish", "ruin", "obliterate"]
+                },
+                {
+                    "english": "deteriorate",
+                    "turkish": ["kötüleşmek", "bozulmak"],
+                    "synonyms": ["decline", "worsen", "degrade"]
+                },
+                {
+                    "english": "determine",
+                    "turkish": ["belirlemek", "kararlaştırmak"],
+                    "synonyms": ["decide", "ascertain", "establish"]
+                },
+                {
+                    "english": "detrimental",
+                    "turkish": ["zararlı", "olumsuz"],
+                    "synonyms": ["harmful", "damaging", "adverse"]
+                },
+                {
+                    "english": "device",
+                    "turkish": ["cihaz", "alet"],
+                    "synonyms": ["apparatus", "gadget", "instrument"]
+                },
+                {
+                    "english": "diagnosis",
+                    "turkish": ["teşhis", "tanı"],
+                    "synonyms": ["identification", "analysis", "assessment"]
+                },
+                {
+                    "english": "diagnosis",
+                    "turkish": ["teşhis", "tanı"],
+                    "synonyms": ["assessment", "evaluation", "identification"]
+                },
+                {
+                    "english": "discreet",
+                    "turkish": ["tedbirli", "dikkatli"],
+                    "synonyms": ["tactful", "prudent", "circumspect"]
+                },
+                {
+                    "english": "disorder",
+                    "turkish": ["düzensizlik", "bozukluk"],
+                    "synonyms": ["chaos", "disorganization", "disarray"]
+                },
+                {
+                    "english": "dispose",
+                    "turkish": ["atılamak", "düzenlemek"],
+                    "synonyms": ["discard", "eliminate", "arrange"]
+                },
+                {
+                    "english": "distinguish",
+                    "turkish": ["ayırt etmek", "farklılaştırmak"],
+                    "synonyms": ["differentiate", "discern", "recognize"]
+                },
+                {
+                    "english": "distract",
+                    "turkish": ["dikkatini dağıtmak"],
+                    "synonyms": ["divert", "sidetrack", "disperse"]
+                },
+                {
+                    "english": "distress",
+                    "turkish": ["sıkıntı", "üzüntü"],
+                    "synonyms": ["anguish", "anxiety", "suffering"]
+                },
+                {
+                    "english": "disturb",
+                    "turkish": ["rahatsız etmek", "bozmak"],
+                    "synonyms": ["interrupt", "disrupt", "upset"]
+                },
+                {
+                    "english": "do well by",
+                    "turkish": ["iyi davranmak", "yarar sağlamak"],
+                    "synonyms": ["benefit", "treat well", "support"]
+                },
+                {
+                    "english": "dramatic",
+                    "turkish": ["dramatik", "çarpıcı"],
+                    "synonyms": ["theatrical", "emotional", "striking"]
+                },
+                {
+                    "english": "draw up",
+                    "turkish": ["hazırlamak", "düzenlemek"],
+                    "synonyms": ["prepare", "formulate", "draft"]
+                },
+                {
+                    "english": "effective",
+                    "turkish": ["etkili", "verimli"],
+                    "synonyms": ["efficient", "potent", "efficacious"]
+                },
+                {
+                    "english": "emerge",
+                    "turkish": ["ortaya çıkmak", "belirmek"],
+                    "synonyms": ["appear", "surface", "arise"]
+                },
+                {
+                    "english": "enable",
+                    "turkish": ["olanak tanımak", "mümkün kılmak"],
+                    "synonyms": ["allow", "empower", "facilitate"]
+                },
+                {
+                    "english": "encourage",
+                    "turkish": ["cesaretlendirmek", "teşvik etmek"],
+                    "synonyms": ["inspire", "motivate", "promote"]
+                },
+                {
+                    "english": "endemic",
+                    "turkish": ["yerel", "özgü"],
+                    "synonyms": ["native", "prevalent", "restricted"]
+                },
+                {
+                    "english": "ensure",
+                    "turkish": ["sağlamak", "garanti etmek"],
+                    "synonyms": ["guarantee", "secure", "confirm"]
+                },
+                {
+                    "english": "entire",
+                    "turkish": ["tam", "bütün"],
+                    "synonyms": ["whole", "complete", "total"]
+                },
+                {
+                    "english": "episode",
+                    "turkish": ["bölüm", "olay"],
+                    "synonyms": ["incident", "event", "chapter"]
+                },
+                {
+                    "english": "essential",
+                    "turkish": ["temel", "vazgeçilmez"],
+                    "synonyms": ["necessary", "vital", "crucial"]
+                },
+                {
+                    "english": "establish",
+                    "turkish": ["kurmak", "oluşturmak"],
+                    "synonyms": ["set up", "found", "institute"]
+                },
+                {
+                    "english": "exact",
+                    "turkish": ["tam", "kesin"],
+                    "synonyms": ["precise", "accurate", "specific"]
+                },
+                {
+                    "english": "examine",
+                    "turkish": ["incelemek", "tetkik etmek"],
+                    "synonyms": ["inspect", "study", "analyze"]
+                },
+                {
+                    "english": "excess",
+                    "turkish": ["fazlalık", "aşırılık"],
+                    "synonyms": ["surplus", "overflow", "extra"]
+                },
+                {
+                    "english": "excessive",
+                    "turkish": ["aşırı", "haddinden fazla"],
+                    "synonyms": ["overabundant", "extreme", "exorbitant"]
+                },
+                {
+                    "english": "exchange",
+                    "turkish": ["değiş tokuş yapmak", "takası"],
+                    "synonyms": ["swap", "trade", "switch"]
+                },
+                {
+                    "english": "exemplary",
+                    "turkish": ["örnek", "model"],
+                    "synonyms": ["ideal", "commendable", "notable"]
+                },
+                {
+                    "english": "exert",
+                    "turkish": ["uygulamak", "harcamak"],
+                    "synonyms": ["apply", "exercise", "deploy"]
+                },
+                {
+                    "english": "exhale",
+                    "turkish": ["nefes vermek"],
+                    "synonyms": ["breathe out", "expire", "emit"]
+                },
+                {
+                    "english": "expand",
+                    "turkish": ["genişletmek", "büyütmek"],
+                    "synonyms": ["enlarge", "extend", "increase"]
+                },
+                {
+                    "english": "expect",
+                    "turkish": ["beklemek", "umarım"],
+                    "synonyms": ["anticipate", "await", "predict"]
+                },
+                {
+                    "english": "expend",
+                    "turkish": ["harcamak", "tüketmek"],
+                    "synonyms": ["spend", "use", "consume"]
+                },
+                {
+                    "english": "expose",
+                    "turkish": ["açığa çıkarmak", "maruz bırakmak"],
+                    "synonyms": ["reveal", "uncover", "display"]
+                },
+                {
+                    "english": "extreme",
+                    "turkish": ["aşırı", "uç"],
+                    "synonyms": ["radical", "utter", "intense"]
+                },
+                {
+                    "english": "factual",
+                    "turkish": ["gerçeklere dayalı"],
+                    "synonyms": ["real", "true", "accurate"]
+                },
+                {
+                    "english": "fair",
+                    "turkish": ["adil", "makul"],
+                    "synonyms": ["just", "equitable", "reasonable"]
+                },
+                {
+                    "english": "false",
+                    "turkish": ["yanlış", "sahte"],
+                    "synonyms": ["incorrect", "erroneous", "fake"]
+                },
+                {
+                    "english": "feel up to",
+                    "turkish": ["güç yetmek", "yapabilmek"],
+                    "synonyms": ["manage", "be able to", "have the energy"]
+                },
+                {
+                    "english": "fill out",
+                    "turkish": ["doldurmak"],
+                    "synonyms": ["complete", "populate", "answer"]
+                },
+                {
+                    "english": "find out",
+                    "turkish": ["öğrenmek", "bulmak"],
+                    "synonyms": ["discover", "learn", "ascertain"]
+                },
+                {
+                    "english": "find out about",
+                    "turkish": ["hakkında bilgi edinmek"],
+                    "synonyms": ["learn", "discover", "uncover"]
+                },
+                {
+                    "english": "fold over",
+                    "turkish": ["katlamak", "kıvrılmak"],
+                    "synonyms": ["bend", "crease", "double"]
+                },
+                {
+                    "english": "follow up",
+                    "turkish": ["takip etmek", "devam etmek"],
+                    "synonyms": ["pursue", "continue", "monitor"]
+                },
+                {
+                    "english": "force",
+                    "turkish": ["zorlamak", "kuvvet"],
+                    "synonyms": ["compel", "drive", "impel"]
+                },
+                {
+                    "english": "forceful",
+                    "turkish": ["etkili", "kuvvetli"],
+                    "synonyms": ["powerful", "vigorous", "assertive"]
+                },
+                {
+                    "english": "fortunate",
+                    "turkish": ["şanslı", "talihli"],
+                    "synonyms": ["lucky", "blessed", "favored"]
+                },
+                {
+                    "english": "fragment",
+                    "turkish": ["parça", "kırıntı"],
+                    "synonyms": ["piece", "shard", "bit"]
+                },
+                {
+                    "english": "get along with",
+                    "turkish": ["iyi geçinmek"],
+                    "synonyms": ["coexist", "associate", "relate"]
+                },
+                {
+                    "english": "get in touch with",
+                    "turkish": ["temasa geçmek"],
+                    "synonyms": ["contact", "reach", "communicate"]
+                },
+                {
+                    "english": "get on",
+                    "turkish": ["devam etmek", "ilerlemek"],
+                    "synonyms": ["proceed", "continue", "advance"]
+                },
+                {
+                    "english": "get rid of",
+                    "turkish": ["kurtulmak", "atmak"],
+                    "synonyms": ["eliminate", "dispose of", "remove"]
+                },
+                {
+                    "english": "give up",
+                    "turkish": ["vazgeçmek"],
+                    "synonyms": ["surrender", "quit", "relinquish"]
+                },
+                {
+                    "english": "go over",
+                    "turkish": ["gözden geçirmek", "incelemek"],
+                    "synonyms": ["review", "examine", "analyze"]
+                },
+                {
+                    "english": "grow",
+                    "turkish": ["büyümek", "gelişmek"],
+                    "synonyms": ["develop", "expand", "mature"]
+                },
+                {
+                    "english": "guide",
+                    "turkish": ["rehberlik etmek", "yol göstermek"],
+                    "synonyms": ["lead", "direct", "escort"]
+                },
+                {
+                    "english": "hard",
+                    "turkish": ["zor", "güç"],
+                    "synonyms": ["difficult", "tough", "challenging"]
+                },
+                {
+                    "english": "high",
+                    "turkish": ["yüksek"],
+                    "synonyms": ["tall", "elevated", "lofty"]
+                },
+                {
+                    "english": "hold up",
+                    "turkish": ["tutmak", "geciktirmek"],
+                    "synonyms": ["delay", "suspend", "support"]
+                },
+                {
+                    "english": "hostile",
+                    "turkish": ["düşmanca", "olumsuz"],
+                    "synonyms": ["unfriendly", "antagonistic", "aggressive"]
+                },
+                {
+                    "english": "however",
+                    "turkish": ["fakat", "ancak"],
+                    "synonyms": ["nevertheless", "nonetheless", "still"]
+                },
+                {
+                    "english": "identify",
+                    "turkish": ["tanımlamak", "belirlemek"],
+                    "synonyms": ["recognize", "determine", "name"]
+                },
+                {
+                    "english": "ignore",
+                    "turkish": ["görmezden gelmek"],
+                    "synonyms": ["disregard", "neglect", "overlook"]
+                },
+                {
+                    "english": "imminent",
+                    "turkish": ["yakın", "çok yakın"],
+                    "synonyms": ["impending", "forthcoming", "looming"]
+                },
+                {
+                    "english": "impetuous",
+                    "turkish": ["atılgan", "düşüncesiz"],
+                    "synonyms": ["rash", "impulsive", "hasty"]
+                },
+                {
+                    "english": "implicate",
+                    "turkish": ["içermek", "suçlamak"],
+                    "synonyms": ["incriminate", "involve", "suggest"]
+                },
+                {
+                    "english": "impulsive",
+                    "turkish": ["dürtüsel", "ani"],
+                    "synonyms": ["spontaneous", "rash", "instinctive"]
+                },
+                {
+                    "english": "inadequate",
+                    "turkish": ["yetersiz"],
+                    "synonyms": ["insufficient", "deficient", "unsatisfactory"]
+                },
+                {
+                    "english": "incidence",
+                    "turkish": ["vaka", "sıklık"],
+                    "synonyms": ["occurrence", "frequency", "rate"]
+                },
+                {
+                    "english": "incision",
+                    "turkish": ["kesik", "kesi"],
+                    "synonyms": ["cut", "slice", "gash"]
+                },
+                {
+                    "english": "increase",
+                    "turkish": ["artırmak", "yükseltmek"],
+                    "synonyms": ["raise", "grow", "escalate"]
+                },
+                {
+                    "english": "indefinite",
+                    "turkish": ["belirsiz", "sınırsız"],
+                    "synonyms": ["uncertain", "vague", "limitless"]
+                },
+                {
+                    "english": "indicate",
+                    "turkish": ["işaret etmek", "belirtmek"],
+                    "synonyms": ["show", "suggest", "demonstrate"]
+                },
+                {
+                    "english": "indifferent",
+                    "turkish": ["umursamaz", "ilgisi olmayan"],
+                    "synonyms": ["apathetic", "unconcerned", "dispassionate"]
+                },
+                {
+                    "english": "indirect",
+                    "turkish": ["dolaylı"],
+                    "synonyms": ["circuitous", "implicit", "secondary"]
+                },
+                {
+                    "english": "induce",
+                    "turkish": ["sebep olmak", "uyarmak"],
+                    "synonyms": ["cause", "provoke", "stimulate"]
+                },
+                {
+                    "english": "inevitable",
+                    "turkish": ["kaçınılmaz"],
+                    "synonyms": ["unavoidable", "certain", "ineluctable"]
+                },
+                {
+                    "english": "infect",
+                    "turkish": ["bulaştırmak", "etkilemek"],
+                    "synonyms": ["contaminate", "transmit", "affect"]
+                },
+                {
+                    "english": "infectious",
+                    "turkish": ["bulaşıcı"],
+                    "synonyms": ["contagious", "communicable", "transmittable"]
+                },
+                {
+                    "english": "inform",
+                    "turkish": ["bilgilendirmek"],
+                    "synonyms": ["notify", "advise", "apprise"]
+                },
+                {
+                    "english": "infrequent",
+                    "turkish": ["seyrek", "nadir"],
+                    "synonyms": ["rare", "occasional", "sporadic"]
+                },
+                {
+                    "english": "ingredient",
+                    "turkish": ["bileşen", "malzeme"],
+                    "synonyms": ["component", "element", "constituent"]
+                },
+                {
+                    "english": "initial",
+                    "turkish": ["ilk", "başlangıç"],
+                    "synonyms": ["first", "primary", "introductory"]
+                },
+                {
+                    "english": "intense",
+                    "turkish": ["yoğun", "şiddetli"],
+                    "synonyms": ["extreme", "strong", "acute"]
+                },
+                {
+                    "english": "intensive",
+                    "turkish": ["yoğun", "derin"],
+                    "synonyms": ["concentrated", "extensive", "profound"]
+                },
+                {
+                    "english": "interact",
+                    "turkish": ["etkileşmek"],
+                    "synonyms": ["communicate", "connect", "engage"]
+                },
+                {
+                    "english": "interfere",
+                    "turkish": ["müdahale etmek", "karışmak"],
+                    "synonyms": ["meddle", "intervene", "intrude"]
+                },
+                {
+                    "english": "intrinsic",
+                    "turkish": ["özünde", "doğasında"],
+                    "synonyms": ["inherent", "innate", "essential"]
+                },
+                {
+                    "english": "invade",
+                    "turkish": ["işgal etmek", "saldırmak"],
+                    "synonyms": ["attack", "encroach", "penetrate"]
+                },
+                {
+                    "english": "irrelevant",
+                    "turkish": ["alakasız", "ilgili olmayan"],
+                    "synonyms": ["immaterial", "unrelated", "inapplicable"]
+                },
+                {
+                    "english": "irreversible",
+                    "turkish": ["geri dönüşü olmayan"],
+                    "synonyms": ["permanent", "irretrievable", "final"]
+                },
+                {
+                    "english": "justify",
+                    "turkish": ["haklı çıkarmak", "meşrulaştırmak"],
+                    "synonyms": ["vindicate", "validate", "excuse"]
+                },
+                {
+                    "english": "keep to",
+                    "turkish": ["sadık kalmak", "riayet etmek"],
+                    "synonyms": ["adhere to", "stick to", "follow"]
+                },
+                {
+                    "english": "keep up with",
+                    "turkish": ["ayak uydurmak", "yetişmek"],
+                    "synonyms": ["follow", "stay abreast of", "match"]
+                },
+                {
+                    "english": "level",
+                    "turkish": ["seviye", "düz"],
+                    "synonyms": ["flat", "even", "plane"]
+                },
+                {
+                    "english": "light up",
+                    "turkish": ["aydınlatmak", "parlatmak"],
+                    "synonyms": ["illuminate", "brighten", "enliven"]
+                },
+                {
+                    "english": "locate",
+                    "turkish": ["bulmak", "yerleştirmek"],
+                    "synonyms": ["find", "situate", "position"]
+                },
+                {
+                    "english": "look after",
+                    "turkish": ["bakmak", "ilgilenmek"],
+                    "synonyms": ["take care of", "attend to", "mind"]
+                },
+                {
+                    "english": "look down on",
+                    "turkish": ["hor görmek", "küçümsemek"],
+                    "synonyms": ["disdain", "despise", "regard as inferior"]
+                },
+                {
+                    "english": "look forward to",
+                    "turkish": ["dört gözle beklemek"],
+                    "synonyms": ["anticipate", "await", "expect"]
+                },
+                {
+                    "english": "look into",
+                    "turkish": ["araştırmak", "incelemek"],
+                    "synonyms": ["investigate", "examine", "probe"]
+                },
+                {
+                    "english": "look out for",
+                    "turkish": ["dikkat etmek", "sakınmak"],
+                    "synonyms": ["watch for", "be alert for", "beware of"]
+                },
+                {
+                    "english": "look over",
+                    "turkish": ["gözden geçirmek", "incelemek"],
+                    "synonyms": ["review", "inspect", "examine"]
+                },
+                {
+                    "english": "look up",
+                    "turkish": ["araştırmak", "yukarı bakmak"],
+                    "synonyms": ["search for", "check", "consult"]
+                },
+                {
+                    "english": "lose out",
+                    "turkish": ["kaybetmek", "mağlup olmak"],
+                    "synonyms": ["miss out", "forfeit", "suffer loss"]
+                },
+                {
+                    "english": "loud",
+                    "turkish": ["gürültülü", "yüksek sesli"],
+                    "synonyms": ["noisy", "boisterous", "thunderous"]
+                },
+                {
+                    "english": "loyal",
+                    "turkish": ["sadık", "bağlı"],
+                    "synonyms": ["faithful", "devoted", "steadfast"]
+                },
+                {
+                    "english": "maintain",
+                    "turkish": ["sürdürmek", "bakımını yapmak"],
+                    "synonyms": ["preserve", "uphold", "continue"]
+                },
+                {
+                    "english": "make up",
+                    "turkish": ["oluşturmak", "barışmak"],
+                    "synonyms": ["invent", "compose", "reconcile"]
+                },
+                {
+                    "english": "make up for",
+                    "turkish": ["telafi etmek", "ödemek"],
+                    "synonyms": ["compensate", "offset", "redress"]
+                },
+                {
+                    "english": "make up to",
+                    "turkish": ["yalakalık etmek", "iyilik yapmak"],
+                    "synonyms": ["flatter", "suck up to", "brown-nose"]
+                },
+                {
+                    "english": "malignant",
+                    "turkish": ["kötü huylu", "zararlı"],
+                    "synonyms": ["cancerous", "hostile", "evil"]
+                },
+                {
+                    "english": "marginal",
+                    "turkish": ["sınıra yakın", "önemsiz"],
+                    "synonyms": ["minimal", "insignificant", "slight"]
+                },
+                {
+                    "english": "measure",
+                    "turkish": ["ölçmek", "ölçü"],
+                    "synonyms": ["gauge", "assess", "quantify"]
+                },
+                {
+                    "english": "metabolize",
+                    "turkish": ["metabolize etmek", "sindirmek"],
+                    "synonyms": ["process", "digest", "break down"]
+                },
+                {
+                    "english": "mistrust",
+                    "turkish": ["güvensizlik", "şüphe duymak"],
+                    "synonyms": ["distrust", "suspicion", "doubt"]
+                },
+                {
+                    "english": "monitor",
+                    "turkish": ["izlemek", "gözlemlemek"],
+                    "synonyms": ["observe", "track", "survey"]
+                },
+                {
+                    "english": "move in",
+                    "turkish": ["taşınmak", "girmek"],
+                    "synonyms": ["settle", "relocate", "infiltrate"]
+                },
+                {
+                    "english": "near",
+                    "turkish": ["yakın", "meydana yakın"],
+                    "synonyms": ["close", "adjacent", "proximate"]
+                },
+                {
+                    "english": "negligent",
+                    "turkish": ["ihmalci", "özen göstermeyen"],
+                    "synonyms": ["careless", "remiss", "lax"]
+                },
+                {
+                    "english": "negligible",
+                    "turkish": ["önemsiz", "ihmal edilebilir"],
+                    "synonyms": ["insignificant", "trivial", "minimal"]
+                },
+                {
+                    "english": "nevertheless",
+                    "turkish": ["yine de", "bununla birlikte"],
+                    "synonyms": ["nonetheless", "still", "even so"]
+                },
+                {
+                    "english": "notice",
+                    "turkish": ["fark etmek", "dikkate almak"],
+                    "synonyms": ["observe", "see", "detect"]
+                },
+                {
+                    "english": "nutritious",
+                    "turkish": ["besleyici", "sağlıklı"],
+                    "synonyms": ["wholesome", "nourishing", "healthful"]
+                },
+                {
+                    "english": "obligation",
+                    "turkish": ["yükümlülük", "zorunluluk"],
+                    "synonyms": ["duty", "responsibility", "commitment"]
+                },
+                {
+                    "english": "obsession",
+                    "turkish": ["takıntı", "saplantı"],
+                    "synonyms": ["fixation", "preoccupation", "infatuation"]
+                },
+                {
+                    "english": "obstruct",
+                    "turkish": ["engellemek", "tıkanıklık yaratmak"],
+                    "synonyms": ["block", "hinder", "impede"]
+                },
+                {
+                    "english": "obvious",
+                    "turkish": ["bariz", "açık"],
+                    "synonyms": ["clear", "evident", "plain"]
+                },
+                {
+                    "english": "occasional",
+                    "turkish": ["ara sıra", "seyrek"],
+                    "synonyms": ["sporadic", "infrequent", "occasional"]
+                },
+                {
+                    "english": "occur",
+                    "turkish": ["meydana gelmek", "olmak"],
+                    "synonyms": ["happen", "transpire", "arise"]
+                },
+                {
+                    "english": "offend",
+                    "turkish": ["kırmak", "incitmek"],
+                    "synonyms": ["insult", "affront", "outrage"]
+                },
+                {
+                    "english": "the other hand",
+                    "turkish": ["öte yandan"],
+                    "synonyms": ["conversely", "alternatively", "on the flip side"]
+                },
+                {
+                    "english": "option",
+                    "turkish": ["seçenek"],
+                    "synonyms": ["choice", "alternative", "possibility"]
+                },
+                {
+                    "english": "optional",
+                    "turkish": ["isteğe bağlı"],
+                    "synonyms": ["voluntary", "discretionary", "elective"]
+                },
+                {
+                    "english": "organize",
+                    "turkish": ["düzenlemek", "organize etmek"],
+                    "synonyms": ["arrange", "systematize", "coordinate"]
+                },
+                {
+                    "english": "otherwise",
+                    "turkish": ["aksi halde", "başka türlü"],
+                    "synonyms": ["else", "alternatively", "if not"]
+                },
+                {
+                    "english": "pain",
+                    "turkish": ["acı", "sızlama"],
+                    "synonyms": ["ache", "suffering", "discomfort"]
+                },
+                {
+                    "english": "partial",
+                    "turkish": ["kısmi", "yarım"],
+                    "synonyms": ["incomplete", "biased", "fragmentary"]
+                },
+                {
+                    "english": "pass up",
+                    "turkish": ["kaçırmak", "vazgeçmek"],
+                    "synonyms": ["decline", "reject", "forgo"]
+                },
+                {
+                    "english": "perceive",
+                    "turkish": ["algılamak", "fark etmek"],
+                    "synonyms": ["discern", "recognize", "observe"]
+                },
+                {
+                    "english": "permanent",
+                    "turkish": ["kalıcı", "sürekli"],
+                    "synonyms": ["everlasting", "enduring", "lasting"]
+                },
+                {
+                    "english": "permit",
+                    "turkish": ["izin vermek", "müsaade etmek"],
+                    "synonyms": ["allow", "authorize", "let"]
+                },
+                {
+                    "english": "perpetual",
+                    "turkish": ["sürekli", "ebedi"],
+                    "synonyms": ["endless", "constant", "unending"]
+                },
+                {
+                    "english": "physical",
+                    "turkish": ["fiziksel", "bedensel"],
+                    "synonyms": ["corporeal", "material", "tangible"]
+                },
+                {
+                    "english": "plausible",
+                    "turkish": ["makul", "olası"],
+                    "synonyms": ["credible", "believable", "likely"]
+                },
+                {
+                    "english": "point out",
+                    "turkish": ["işaret etmek", "vurgulamak"],
+                    "synonyms": ["indicate", "mention", "note"]
+                },
+                {
+                    "english": "potential",
+                    "turkish": ["potansiyel", "olanak"],
+                    "synonyms": ["possible", "latent", "prospective"]
+                },
+                {
+                    "english": "precise",
+                    "turkish": ["kesin", "net"],
+                    "synonyms": ["exact", "accurate", "definite"]
+                },
+                {
+                    "english": "predominant",
+                    "turkish": ["baskın", "egemen"],
+                    "synonyms": ["main", "primary", "chief"]
+                },
+                {
+                    "english": "prefer",
+                    "turkish": ["tercih etmek"],
+                    "synonyms": ["favor", "choose", "select"]
+                },
+                {
+                    "english": "preferable",
+                    "turkish": ["tercih edilir", "daha iyi"],
+                    "synonyms": ["desirable", "better", "more suitable"]
+                },
+                {
+                    "english": "prescribe",
+                    "turkish": ["reçete etmek", "öngörmek"],
+                    "synonyms": ["order", "recommend", "dictate"]
+                },
+                {
+                    "english": "prevail",
+                    "turkish": ["üstün gelmek", "baskın olmak"],
+                    "synonyms": ["dominate", "triumph", "predominate"]
+                },
+                {
+                    "english": "prevalent",
+                    "turkish": ["yaygın", "olağan"],
+                    "synonyms": ["widespread", "common", "frequent"]
+                },
+                {
+                    "english": "prevent",
+                    "turkish": ["önlemek", "engellemek"],
+                    "synonyms": ["avert", "stop", "hinder"]
+                },
+                {
+                    "english": "previous",
+                    "turkish": ["önceki", "geçmiş"],
+                    "synonyms": ["prior", "earlier", "preceding"]
+                },
+                {
+                    "english": "probable",
+                    "turkish": ["muhtemel", "olasılıklı"],
+                    "synonyms": ["likely", "plausible", "expected"]
+                },
+                {
+                    "english": "profound",
+                    "turkish": ["derin", "önemli"],
+                    "synonyms": ["deep", "intense", "serious"]
+                },
+                {
+                    "english": "progressive",
+                    "turkish": ["ilerici", "modern"],
+                    "synonyms": ["advanced", "forward-thinking", "reformist"]
+                },
+                {
+                    "english": "prompt",
+                    "turkish": ["hemen", "derhal"],
+                    "synonyms": ["immediate", "quick", "instant"]
+                },
+                {
+                    "english": "proper",
+                    "turkish": ["uygun", "makul"],
+                    "synonyms": ["appropriate", "suitable", "correct"]
+                },
+                {
+                    "english": "proportional",
+                    "turkish": ["orantılı", "oranlı"],
+                    "synonyms": ["relative", "corresponding", "equivalent"]
+                },
+                {
+                    "english": "protective",
+                    "turkish": ["koruyucu", "muhafazakar"],
+                    "synonyms": ["defensive", "sheltering", "guarding"]
+                },
+                {
+                    "english": "provide",
+                    "turkish": ["sağlamak", "temin etmek"],
+                    "synonyms": ["supply", "furnish", "offer"]
+                },
+                {
+                    "english": "pull out of",
+                    "turkish": ["çekilmek", "vazgeçmek"],
+                    "synonyms": ["withdraw from", "retreat", "exit"]
+                },
+                {
+                    "english": "pull through",
+                    "turkish": ["atlatmak", "başarmak"],
+                    "synonyms": ["recover", "overcome", "survive"]
+                },
+                {
+                    "english": "put down",
+                    "turkish": ["aşağılamak", "yazmak"],
+                    "synonyms": ["insult", "debase", "ridicule"]
+                },
+                {
+                    "english": "put out",
+                    "turkish": ["yaymak", "söndürmek"],
+                    "synonyms": ["extinguish", "publish", "distribute"]
+                },
+                {
+                    "english": "put through",
+                    "turkish": ["bağlamak", "gerçekleştirmek"],
+                    "synonyms": ["connect", "transfer", "accomplish"]
+                },
+                {
+                    "english": "put up with",
+                    "turkish": ["katlanmak", "dayanmak"],
+                    "synonyms": ["tolerate", "endure", "suffer"]
+                },
+                {
+                    "english": "quite",
+                    "turkish": ["oldukça", "biraz"],
+                    "synonyms": ["fairly", "rather", "pretty"]
+                },
+                {
+                    "english": "random",
+                    "turkish": ["rastgele", "keyfi"],
+                    "synonyms": ["arbitrary", "haphazard", "uncertain"]
+                },
+                {
+                    "english": "rank",
+                    "turkish": ["sıra", "derece"],
+                    "synonyms": ["grade", "level", "order"]
+                },
+                {
+                    "english": "rare",
+                    "turkish": ["nadir", "az bulunan"],
+                    "synonyms": ["uncommon", "scarce", "infrequent"]
+                },
+                {
+                    "english": "rate",
+                    "turkish": ["oran", "değer"],
+                    "synonyms": ["measure", "assess", "evaluate"]
+                },
+                {
+                    "english": "ready",
+                    "turkish": ["hazır", "müsait"],
+                    "synonyms": ["prepared", "set", "willing"]
+                },
+                {
+                    "english": "recess",
+                    "turkish": ["mola", "ara"],
+                    "synonyms": ["break", "interval", "pause"]
+                },
+                {
+                    "english": "recommend",
+                    "turkish": ["tavsiye etmek", "öneride bulunmak"],
+                    "synonyms": ["suggest", "advise", "endorse"]
+                },
+                {
+                    "english": "recover",
+                    "turkish": ["iyileşmek", "kurtulmak"],
+                    "synonyms": ["heal", "get better", "bounce back"]
+                },
+                {
+                    "english": "refer",
+                    "turkish": ["atıfta bulunmak", "başvurmak"],
+                    "synonyms": ["mention", "allude to", "cite"]
+                },
+                {
+                    "english": "regenerate",
+                    "turkish": ["yenilemek", "canlandırmak"],
+                    "synonyms": ["revive", "renew", "rejuvenate"]
+                },
+                {
+                    "english": "regret",
+                    "turkish": ["pişman olmak", "üzülmek"],
+                    "synonyms": ["repent", "lament", "rue"]
+                },
+                {
+                    "english": "regulate",
+                    "turkish": ["düzenlemek", "kontrol etmek"],
+                    "synonyms": ["control", "manage", "standardize"]
+                },
+                {
+                    "english": "relate",
+                    "turkish": ["ilişkilendirmek", "bağlantı kurmak"],
+                    "synonyms": ["connect", "link", "associate"]
+                },
+                {
+                    "english": "relative",
+                    "turkish": ["göreceli", "akrabası"],
+                    "synonyms": ["comparative", "proportional", "corresponding"]
+                },
+                {
+                    "english": "relevant",
+                    "turkish": ["ilgili", "alakalı"],
+                    "synonyms": ["pertinent", "applicable", "germane"]
+                },
+                {
+                    "english": "reliable",
+                    "turkish": ["güvenilir"],
+                    "synonyms": ["dependable", "trustworthy", "consistent"]
+                },
+                {
+                    "english": "relief",
+                    "turkish": ["rahatlama", "hafifleme"],
+                    "synonyms": ["alleviation", "ease", "comfort"]
+                },
+                {
+                    "english": "reluctant",
+                    "turkish": ["isteksiz"],
+                    "synonyms": ["hesitant", "unwilling", "disinclined"]
+                },
+                {
+                    "english": "rely on",
+                    "turkish": ["güvenmek"],
+                    "synonyms": ["depend on", "trust", "count on"]
+                },
+                {
+                    "english": "remedy",
+                    "turkish": ["çare", "tedavi"],
+                    "synonyms": ["cure", "solution", "treatment"]
+                },
+                {
+                    "english": "remote",
+                    "turkish": ["uzak"],
+                    "synonyms": ["distant", "isolated", "far-off"]
+                },
+                {
+                    "english": "remove",
+                    "turkish": ["kaldırmak", "çıkarmak"],
+                    "synonyms": ["eliminate", "delete", "dispose"]
+                },
+                {
+                    "english": "repeat",
+                    "turkish": ["tekrar etmek"],
+                    "synonyms": ["recur", "redo", "reiterate"]
+                },
+                {
+                    "english": "replace",
+                    "turkish": ["değiştirmek", "yerine koymak"],
+                    "synonyms": ["substitute", "exchange", "swap"]
+                },
+                {
+                    "english": "represent",
+                    "turkish": ["temsil etmek"],
+                    "synonyms": ["depict", "symbolize", "portray"]
+                },
+                {
+                    "english": "request",
+                    "turkish": ["talep", "istek"],
+                    "synonyms": ["ask", "demand", "solicit"]
+                },
+                {
+                    "english": "reserve",
+                    "turkish": ["saklamak", "rezervasyon"],
+                    "synonyms": ["retain", "book", "set aside"]
+                },
+                {
+                    "english": "resist",
+                    "turkish": ["direnmek"],
+                    "synonyms": ["withstand", "oppose", "combat"]
+                },
+                {
+                    "english": "respect",
+                    "turkish": ["saygı"],
+                    "synonyms": ["admire", "esteem", "honor"]
+                },
+                {
+                    "english": "respond",
+                    "turkish": ["yanıt vermek"],
+                    "synonyms": ["reply", "answer", "react"]
+                },
+                {
+                    "english": "response",
+                    "turkish": ["yanıt", "tepki"],
+                    "synonyms": ["reply", "reaction", "answer"]
+                },
+                {
+                    "english": "responsible",
+                    "turkish": ["sorumlu"],
+                    "synonyms": ["accountable", "reliable", "trustworthy"]
+                },
+                {
+                    "english": "restrain",
+                    "turkish": ["alıkoymak", "engellemek"],
+                    "synonyms": ["control", "limit", "confine"]
+                },
+                {
+                    "english": "restrict",
+                    "turkish": ["sınırlamak"],
+                    "synonyms": ["limit", "curb", "confine"]
+                },
+                {
+                    "english": "retain",
+                    "turkish": ["saklamak", "korumak"],
+                    "synonyms": ["keep", "preserve", "maintain"]
+                },
+                {
+                    "english": "reveal",
+                    "turkish": ["açığa çıkarmak"],
+                    "synonyms": ["disclose", "uncover", "expose"]
+                },
+                {
+                    "english": "reverse",
+                    "turkish": ["tersine çevirmek"],
+                    "synonyms": ["invert", "undo", "flip"]
+                },
+                {
+                    "english": "run out",
+                    "turkish": ["tükenmek"],
+                    "synonyms": ["exhaust", "deplete", "finish"]
+                },
+                {
+                    "english": "sample",
+                    "turkish": ["örnek"],
+                    "synonyms": ["specimen", "example", "trial"]
+                },
+                {
+                    "english": "scarce",
+                    "turkish": ["nadir", "kıt"],
+                    "synonyms": ["rare", "sparse", "insufficient"]
+                },
+                {
+                    "english": "selective",
+                    "turkish": ["seçici"],
+                    "synonyms": ["discriminating", "particular", "choosy"]
+                },
+                {
+                    "english": "sensitive",
+                    "turkish": ["hassas"],
+                    "synonyms": ["delicate", "responsive", "touchy"]
+                },
+                {
+                    "english": "separate",
+                    "turkish": ["ayırmak", "bölmek"],
+                    "synonyms": ["divide", "detach", "split"]
+                },
+                {
+                    "english": "set down to",
+                    "turkish": ["belirlemek", "dayandırmak"],
+                    "synonyms": ["attribute to", "ascribe", "assign"]
+                },
+                {
+                    "english": "set out",
+                    "turkish": ["başlamak", "yola koyulmak"],
+                    "synonyms": ["embark", "commence", "initiate"]
+                },
+                {
+                    "english": "settle down",
+                    "turkish": ["yerleşmek", "dinlenmek"],
+                    "synonyms": ["calm down", "establish", "stabilize"]
+                },
+                {
+                    "english": "severe",
+                    "turkish": ["şiddetli", "ağır"],
+                    "synonyms": ["intense", "extreme", "serious"]
+                },
+                {
+                    "english": "show off",
+                    "turkish": ["gösteriş yapmak"],
+                    "synonyms": ["exhibit", "display", "flaunt"]
+                },
+                {
+                    "english": "significant",
+                    "turkish": ["önemli"],
+                    "synonyms": ["notable", "meaningful", "substantial"]
+                },
+                {
+                    "english": "similar",
+                    "turkish": ["benzer"],
+                    "synonyms": ["alike", "comparable", "akin"]
+                },
+                {
+                    "english": "single",
+                    "turkish": ["tek"],
+                    "synonyms": ["one", "individual", "sole"]
+                },
+                {
+                    "english": "slow down",
+                    "turkish": ["yavaşlamak"],
+                    "synonyms": ["decelerate", "lag", "reduce speed"]
+                },
+                {
+                    "english": "sole",
+                    "turkish": ["yalnız", "tek"],
+                    "synonyms": ["only", "exclusive", "single"]
+                },
+                {
+                    "english": "solve",
+                    "turkish": ["çözmek"],
+                    "synonyms": ["resolve", "work out", "figure out"]
+                },
+                {
+                    "english": "sort out",
+                    "turkish": ["düzeltmek", "çözmek"],
+                    "synonyms": ["organize", "resolve", "settle"]
+                },
+                {
+                    "english": "stand for",
+                    "turkish": ["temsil etmek", "anlamına gelmek"],
+                    "synonyms": ["represent", "symbolize", "mean"]
+                },
+                {
+                    "english": "stimulate",
+                    "turkish": ["uyarmak", "canlandırmak"],
+                    "synonyms": ["encourage", "arouse", "invigorate"]
+                },
+                {
+                    "english": "substance",
+                    "turkish": ["madde", "öz"],
+                    "synonyms": ["material", "matter", "essence"]
+                },
+                {
+                    "english": "substantial",
+                    "turkish": ["önemli", "hatırı sayılır"],
+                    "synonyms": ["significant", "considerable", "large"]
+                },
+                {
+                    "english": "succeed",
+                    "turkish": ["başarmak"],
+                    "synonyms": ["achieve", "prosper", "prevail"]
+                },
+                {
+                    "english": "sufficient",
+                    "turkish": ["yeterli"],
+                    "synonyms": ["adequate", "enough", "ample"]
+                },
+                {
+                    "english": "superficial",
+                    "turkish": ["yüzeysel"],
+                    "synonyms": ["shallow", "cursory", "external"]
+                },
+                {
+                    "english": "supply",
+                    "turkish": ["sağlamak", "temin etmek"],
+                    "synonyms": ["provide", "furnish", "deliver"]
+                },
+                {
+                    "english": "suppress",
+                    "turkish": ["bastırmak"],
+                    "synonyms": ["repress", "stifle", "quell"]
+                },
+                {
+                    "english": "surgery",
+                    "turkish": ["ameliyat", "cerrahi"],
+                    "synonyms": ["operation", "procedure", "intervention"]
+                },
+                {
+                    "english": "susceptible",
+                    "turkish": ["duyarlı", "meyilli"],
+                    "synonyms": ["vulnerable", "sensitive", "prone"]
+                },
+                {
+                    "english": "sustain",
+                    "turkish": ["sürdürmek", "devam ettirmek"],
+                    "synonyms": ["maintain", "continue", "uphold"]
+                },
+                {
+                    "english": "switch off",
+                    "turkish": ["kapatmak"],
+                    "synonyms": ["turn off", "deactivate", "shut down"]
+                },
+                {
+                    "english": "take along",
+                    "turkish": ["yanında götürmek"],
+                    "synonyms": ["bring", "carry", "accompany"]
+                },
+                {
+                    "english": "take back",
+                    "turkish": ["geri almak"],
+                    "synonyms": ["retract", "withdraw", "recall"]
+                },
+                {
+                    "english": "take down",
+                    "turkish": ["not almak", "indirmek"],
+                    "synonyms": ["record", "dismantle", "lower"]
+                },
+                {
+                    "english": "take over",
+                    "turkish": ["devralmak"],
+                    "synonyms": ["assume", "acquire", "control"]
+                },
+                {
+                    "english": "take up",
+                    "turkish": ["başlamak", "ilgilenmek"],
+                    "synonyms": ["start", "engage in", "occupy"]
+                },
+                {
+                    "english": "target",
+                    "turkish": ["hedef"],
+                    "synonyms": ["aim", "goal", "objective"]
+                },
+                {
+                    "english": "think over",
+                    "turkish": ["düşünmek", "değerlendirmek"],
+                    "synonyms": ["consider", "ponder", "reflect"]
+                },
+                {
+                    "english": "throw up",
+                    "turkish": ["kusmak"],
+                    "synonyms": ["vomit", "regurgitate", "spew"]
+                },
+                {
+                    "english": "together",
+                    "turkish": ["birlikte"],
+                    "synonyms": ["jointly", "collectively", "unitedly"]
+                },
+                {
+                    "english": "transform",
+                    "turkish": ["dönüştürmek"],
+                    "synonyms": ["change", "convert", "alter"]
+                },
+                {
+                    "english": "transient",
+                    "turkish": ["geçici"],
+                    "synonyms": ["temporary", "short-lived", "ephemeral"]
+                },
+                {
+                    "english": "transmit",
+                    "turkish": ["iletmek", "aktarmak"],
+                    "synonyms": ["send", "broadcast", "communicate"]
+                },
+                {
+                    "english": "treat",
+                    "turkish": ["tedavi etmek", "muamele etmek"],
+                    "synonyms": ["handle", "manage", "cure"]
+                },
+                {
+                    "english": "trial",
+                    "turkish": ["deneme", "yargılama"],
+                    "synonyms": ["test", "experiment", "examination"]
+                },
+                {
+                    "english": "turn down",
+                    "turkish": ["reddetmek", "kısmak"],
+                    "synonyms": ["reject", "decline", "refuse"]
+                },
+                {
+                    "english": "turn in",
+                    "turkish": ["teslim etmek"],
+                    "synonyms": ["submit", "hand in", "present"]
+                },
+                {
+                    "english": "turn into",
+                    "turkish": ["dönüştürmek"],
+                    "synonyms": ["convert", "transform", "morph"]
+                },
+                {
+                    "english": "turn on",
+                    "turkish": ["açmak", "kışkırtmak"],
+                    "synonyms": ["activate", "switch on", "excite"]
+                },
+                {
+                    "english": "turn up",
+                    "turkish": ["ortaya çıkmak", "gelmek"],
+                    "synonyms": ["appear", "emerge", "arrive"]
+                },
+                {
+                    "english": "undermine",
+                    "turkish": ["zayıflatmak", "güçsüzleştirmek"],
+                    "synonyms": ["weaken", "sabotage", "erode"]
+                },
+                {
+                    "english": "understand",
+                    "turkish": ["anlamak"],
+                    "synonyms": ["comprehend", "grasp", "fathom"]
+                },
+                {
+                    "english": "unexpected",
+                    "turkish": ["beklenmedik"],
+                    "synonyms": ["surprising", "unforeseen", "sudden"]
+                },
+                {
+                    "english": "unfavorable",
+                    "turkish": ["olumsuz"],
+                    "synonyms": ["adverse", "disadvantageous", "negative"]
+                },
+                {
+                    "english": "unhealthy",
+                    "turkish": ["sağlıksız"],
+                    "synonyms": ["unwholesome", "unsanitary", "detrimental"]
+                },
+                {
+                    "english": "unite",
+                    "turkish": ["birleştirmek", "birleşmek"],
+                    "synonyms": ["join", "merge", "combine"]
+                },
+                {
+                    "english": "unlikely",
+                    "turkish": ["olası olmayan"],
+                    "synonyms": ["improbable", "doubtful", "implausible"]
+                },
+                {
+                    "english": "unmistakable",
+                    "turkish": ["kesin", "inkar edilemez"],
+                    "synonyms": ["clear", "definite", "unambiguous"]
+                },
+                {
+                    "english": "unreserved",
+                    "turkish": ["çekinmesiz", "samimi"],
+                    "synonyms": ["open", "frank", "uninhibited"]
+                },
+                {
+                    "english": "urge",
+                    "turkish": ["teşvik etmek", "istek"],
+                    "synonyms": ["encourage", "prompt", "exhort"]
+                },
+                {
+                    "english": "use up",
+                    "turkish": ["tüketmek", "bitirmek"],
+                    "synonyms": ["exhaust", "consume", "deplete"]
+                },
+                {
+                    "english": "useful",
+                    "turkish": ["yararlı", "faydalı"],
+                    "synonyms": ["helpful", "beneficial", "practical"]
+                },
+                {
+                    "english": "utilize",
+                    "turkish": ["kullanmak", "yararlanmak"],
+                    "synonyms": ["employ", "use", "exploit"]
+                },
+                {
+                    "english": "vague",
+                    "turkish": ["belirsiz", "muğlak"],
+                    "synonyms": ["unclear", "ambiguous", "indefinite"]
+                },
+                {
+                    "english": "vain",
+                    "turkish": ["boş", "nafile"],
+                    "synonyms": ["futile", "useless", "ineffective"]
+                },
+                {
+                    "english": "vary",
+                    "turkish": ["değişmek", "farklılık göstermek"],
+                    "synonyms": ["differ", "fluctuate", "diverge"]
+                },
+                {
+                    "english": "violent",
+                    "turkish": ["şiddetli", "sert"],
+                    "synonyms": ["brutal", "savage", "forceful"]
+                },
+                {
+                    "english": "virtual",
+                    "turkish": ["sanal", "gerçek gibi"],
+                    "synonyms": ["digital", "simulated", "online"]
+                },
+                {
+                    "english": "vulnerable",
+                    "turkish": ["savunmasız"],
+                    "synonyms": ["exposed", "susceptible", "at risk"]
+                },
+                {
+                    "english": "wait for",
+                    "turkish": ["beklemek"],
+                    "synonyms": ["await", "expect", "anticipate"]
+                },
+                {
+                    "english": "wake up",
+                    "turkish": ["uyanmak"],
+                    "synonyms": ["arise", "get up", "awaken"]
+                },
+                {
+                    "english": "wear out",
+                    "turkish": ["aşınmak", "yıpranmak"],
+                    "synonyms": ["exhaust", "deplete", "fray"]
+                },
+                {
+                    "english": "weigh up",
+                    "turkish": ["tartmak", "değerlendirmek"],
+                    "synonyms": ["assess", "evaluate", "consider"]
+                },
+                {
+                    "english": "wide",
+                    "turkish": ["geniş"],
+                    "synonyms": ["broad", "expansive", "extensive"]
+                },
+                {
+                    "english": "wipe out",
+                    "turkish": ["yok etmek", "siler"],
+                    "synonyms": ["destroy", "eradicate", "annihilate"]
+                },
+                {
+                    "english": "withdraw",
+                    "turkish": ["geri çekilmek", "çekilmek"],
+                    "synonyms": ["retreat", "pull back", "remove"]
+                },
+                {
+                    "english": "work out",
+                    "turkish": ["antrenman yapmak", "çözmek"],
+                    "synonyms": ["exercise", "solve", "develop"]
+                },
+                {
+                    "english": "worthy",
+                    "turkish": ["değerli", "layık"],
+                    "synonyms": ["deserving", "meritorious", "commendable"]
+                }
+            ]
+        };
+
+        const colors = ['#FFCDD2', '#C8E6C9', '#BBDEFB', '#FFECB3', '#D1C4E9'];
+        const cardContainer = document.getElementById('cardContainer');
+        let currentIndex = 0;
+
+        function createCard(wordObject) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+
+            const english = document.createElement('h2');
+            english.textContent = wordObject.english;
+            card.appendChild(english);
+
+            const turkishList = document.createElement('ul');
+            wordObject.turkish.forEach(turkishWord => {
+                const li = document.createElement('li');
+                li.textContent = turkishWord;
+                turkishList.appendChild(li);
+            });
+            card.appendChild(turkishList);
+
+            const synonymsList = document.createElement('ul');
+            wordObject.synonyms.forEach(synonym => {
+                const li = document.createElement('li');
+                li.textContent = synonym;
+                synonymsList.appendChild(li);
+            });
+            card.appendChild(synonymsList);
+
+            return card;
+        }
+
+        function loadMoreCards() {
+            const words = jsonData.words;
+            for (let i = 0; i < 10 && currentIndex < words.length; i++, currentIndex++) {
+                const card = createCard(words[currentIndex]);
+                cardContainer.appendChild(card);
+            }
+        }
+
+        window.addEventListener('scroll', () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+                loadMoreCards();
+            }
+        });
+
+        loadMoreCards();
+    </script>
+</body>
+
+</html>

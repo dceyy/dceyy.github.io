@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conjunctions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .card-content {
+            margin-bottom: 10px;
+        }
+
+        .card-examples {
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container" id="card-container"></div>
+    <script>
+        const data = {
+            "conjunctions": [
+                {
+                    "conjunction": "in search of",
+                    "translations": ["arayışında"],
+                    "synonyms": ["looking for"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "They went into the forest in search of rare plants.",
+                        "sentence2": "He traveled to Japan looking for new opportunities.",
+                        "sentence3": "She scrolled through the files in search of evidence."
+                    }
+                },
+                {
+                    "conjunction": "on behalf of",
+                    "translations": ["adına"],
+                    "synonyms": ["representing"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "I accepted the award on behalf of my team.",
+                        "sentence2": "The lawyer spoke representing the company.",
+                        "sentence3": "On behalf of the family, I thank you for your support."
+                    }
+                },
+                {
+                    "conjunction": "by means of",
+                    "translations": ["vasıtasıyla"],
+                    "synonyms": ["through"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "We communicated by means of sign language.",
+                        "sentence2": "The message was sent through a secure channel.",
+                        "sentence3": "By means of hard work, she achieved her goals."
+                    }
+                },
+                {
+                    "conjunction": "in spite of",
+                    "translations": ["-e rağmen"],
+                    "synonyms": ["despite"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "In spite of the storm, the event continued.",
+                        "sentence2": "Despite his fear, he climbed the mountain.",
+                        "sentence3": "She smiled in spite of the pain."
+                    }
+                },
+                {
+                    "conjunction": "with regard to",
+                    "translations": ["ile ilgili olarak"],
+                    "synonyms": ["regarding"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "With regard to your inquiry, we will respond soon.",
+                        "sentence2": "Regarding the budget, some changes are needed.",
+                        "sentence3": "He made no comment with regard to the allegations."
+                    }
+                },
+                {
+                    "conjunction": "in addition to",
+                    "translations": ["ek olarak"],
+                    "synonyms": ["besides"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "In addition to English, she speaks Spanish fluently.",
+                        "sentence2": "Besides the main course, we ordered dessert.",
+                        "sentence3": "In addition to his salary, he earns from freelancing."
+                    }
+                },
+                {
+                    "conjunction": "in comparison with",
+                    "translations": ["kıyaslandığında"],
+                    "synonyms": ["compared to"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "In comparison with last year, profits have doubled.",
+                        "sentence2": "This car is faster compared to the older model.",
+                        "sentence3": "In comparison with her sister, she is more outgoing."
+                    }
+                },
+                {
+                    "conjunction": "on account of",
+                    "translations": ["yüzünden"],
+                    "synonyms": ["because of"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "The match was canceled on account of heavy rain.",
+                        "sentence2": "Because of his injury, he couldn’t play.",
+                        "sentence3": "On account of her dedication, she was promoted."
+                    }
+                },
+                {
+                    "conjunction": "in accordance with",
+                    "translations": ["uygun olarak"],
+                    "synonyms": ["according to"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "The project was completed in accordance with the guidelines.",
+                        "sentence2": "According to the law, this is illegal.",
+                        "sentence3": "In accordance with tradition, they wore black."
+                    }
+                },
+                {
+                    "conjunction": "by virtue of",
+                    "translations": ["sayesinde"],
+                    "synonyms": ["due to"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "By virtue of his experience, he got the job.",
+                        "sentence2": "Due to her talent, she won the competition.",
+                        "sentence3": "He succeeded by virtue of relentless effort."
+                    }
+                },
+                {
+                    "conjunction": "in exchange for",
+                    "translations": ["karşılığında"],
+                    "synonyms": ["in return for"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "He gave her his watch in exchange for her necklace.",
+                        "sentence2": "In return for their help, I offered them a gift.",
+                        "sentence3": "She taught him French in exchange for Spanish lessons."
+                    }
+                },
+                {
+                    "conjunction": "in contrast to",
+                    "translations": ["aksine"],
+                    "synonyms": ["unlike"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "In contrast to his brother, he loves quiet places.",
+                        "sentence2": "Unlike summer, winter here is harsh.",
+                        "sentence3": "Her optimism is in contrast to his pessimism."
+                    }
+                },
+                {
+                    "conjunction": "on the basis of",
+                    "translations": ["dayalı olarak"],
+                    "synonyms": ["based on"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "Decisions are made on the basis of mutual agreement.",
+                        "sentence2": "The theory is based on solid evidence.",
+                        "sentence3": "On the basis of your performance, you’ll be promoted."
+                    }
+                },
+                {
+                    "conjunction": "in response to",
+                    "translations": ["yanıt olarak"],
+                    "synonyms": ["reacting to"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "The government acted swiftly in response to the crisis.",
+                        "sentence2": "Reacting to complaints, they improved the service.",
+                        "sentence3": "In response to the invitation, she sent a gift."
+                    }
+                },
+                {
+                    "conjunction": "with respect to",
+                    "translations": ["bakımından"],
+                    "synonyms": ["regarding"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "With respect to environmental issues, the policy is strict.",
+                        "sentence2": "Regarding your question, the answer is yes.",
+                        "sentence3": "With respect to salary, the offer is competitive."
+                    }
+                },
+                {
+                    "conjunction": "in return for",
+                    "translations": ["karşılığında"],
+                    "synonyms": ["in exchange for"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "She babysat their kids in return for free accommodation.",
+                        "sentence2": "In exchange for his silence, they offered him money.",
+                        "sentence3": "He donated blood in return for a health checkup."
+                    }
+                },
+                {
+                    "conjunction": "at the mercy of",
+                    "translations": ["insafına kalmış"],
+                    "synonyms": ["dependent on"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "The sailors were at the mercy of the storm.",
+                        "sentence2": "Farmers are dependent on the weather for crops.",
+                        "sentence3": "Small businesses are at the mercy of market fluctuations."
+                    }
+                },
+                {
+                    "conjunction": "in lieu of",
+                    "translations": ["yerine"],
+                    "synonyms": ["instead of"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "He received extra vacation days in lieu of a bonus.",
+                        "sentence2": "Instead of cash, they accepted goods.",
+                        "sentence3": "In lieu of flowers, donate to charity."
+                    }
+                },
+                {
+                    "conjunction": "by way of",
+                    "translations": ["yoluyla"],
+                    "synonyms": ["via"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "They traveled to Italy by way of France.",
+                        "sentence2": "The message was sent via email.",
+                        "sentence3": "By way of introduction, he showed his ID."
+                    }
+                },
+                {
+                    "conjunction": "in need of",
+                    "translations": ["ihtiyacı olan"],
+                    "synonyms": ["requiring"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "The old building is in need of repair.",
+                        "sentence2": "She is requiring immediate medical attention.",
+                        "sentence3": "In need of a break, he took a vacation."
+                    }
+                },
+                {
+                    "conjunction": "on top of",
+                    "translations": ["üstüne", "üzerinde kontrol sahibi"],
+                    "synonyms": ["managing"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "She stays on top of all her assignments.",
+                        "sentence2": "He is managing the project efficiently.",
+                        "sentence3": "On top of his job, he volunteers at a shelter."
+                    }
+                },
+                {
+                    "conjunction": "in view of",
+                    "translations": ["göz önünde bulundurularak"],
+                    "synonyms": ["considering"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "In view of the recent events, the meeting was postponed.",
+                        "sentence2": "Considering the weather, we canceled the picnic.",
+                        "sentence3": "In view of his experience, he was hired immediately."
+                    }
+                },
+                {
+                    "conjunction": "in charge of",
+                    "translations": ["sorumlu"],
+                    "synonyms": ["responsible for"],
+                    "additional_meanings": ["yönetmek"],
+                    "examples": {
+                        "sentence1": "She is in charge of the marketing department.",
+                        "sentence2": "He is responsible for organizing the event.",
+                        "sentence3": "In charge of the team, she made all decisions."
+                    }
+                },
+                {
+                    "conjunction": "in favour of",
+                    "translations": ["lehine"],
+                    "synonyms": ["supporting"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "The committee voted in favour of the proposal.",
+                        "sentence2": "She is supporting the new policy.",
+                        "sentence3": "In favour of sustainability, they banned plastic."
+                    }
+                },
+                {
+                    "conjunction": "by reason of",
+                    "translations": ["nedeniyle"],
+                    "synonyms": ["due to"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "By reason of his health, he retired early.",
+                        "sentence2": "Due to technical issues, the flight was delayed.",
+                        "sentence3": "She succeeded by reason of her determination."
+                    }
+                },
+                {
+                    "conjunction": "in case of",
+                    "translations": ["durumunda"],
+                    "synonyms": ["if there is"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "In case of emergency, press the red button.",
+                        "sentence2": "If there is a fire, use the stairs.",
+                        "sentence3": "Keep this document in case of an audit."
+                    }
+                },
+                {
+                    "conjunction": "at the risk of",
+                    "translations": ["riskiyle"],
+                    "synonyms": ["risking"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "At the risk of sounding rude, I disagree.",
+                        "sentence2": "He saved the child, risking his own life.",
+                        "sentence3": "At the risk of failure, she tried again."
+                    }
+                },
+                {
+                    "conjunction": "in light of",
+                    "translations": ["ışığında"],
+                    "synonyms": ["considering"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "In light of new evidence, the case was reopened.",
+                        "sentence2": "Considering the budget, we cut expenses.",
+                        "sentence3": "In light of your feedback, we revised the plan."
+                    }
+                },
+                {
+                    "conjunction": "on the brink of",
+                    "translations": ["eşiğinde"],
+                    "synonyms": ["on the verge of"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "The species is on the brink of extinction.",
+                        "sentence2": "She was on the verge of tears.",
+                        "sentence3": "The company is on the brink of a major breakthrough."
+                    }
+                },
+                {
+                    "conjunction": "in place of",
+                    "translations": ["yerine"],
+                    "synonyms": ["instead of"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "Use olive oil in place of butter.",
+                        "sentence2": "Instead of sugar, they used honey.",
+                        "sentence3": "He attended the meeting in place of his manager."
+                    }
+                },
+                {
+                    "conjunction": "with the exception of",
+                    "translations": ["hariç"],
+                    "synonyms": ["except for"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "With the exception of John, everyone agreed.",
+                        "sentence2": "Except for Mondays, the museum is open.",
+                        "sentence3": "All team members, with the exception of two, attended."
+                    }
+                },
+                {
+                    "conjunction": "in terms of",
+                    "translations": ["açısından"],
+                    "synonyms": ["regarding"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "In terms of quality, this product is the best.",
+                        "sentence2": "Regarding salary, the offer is acceptable.",
+                        "sentence3": "In terms of creativity, she excels."
+                    }
+                },
+                {
+                    "conjunction": "on the subject of",
+                    "translations": ["konusunda"],
+                    "synonyms": ["about"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "On the subject of climate change, he is an expert.",
+                        "sentence2": "We talked about future plans.",
+                        "sentence3": "On the subject of art, she has strong opinions."
+                    }
+                },
+                {
+                    "conjunction": "at the heart of",
+                    "translations": ["merkezinde"],
+                    "synonyms": ["central to"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "Trust is at the heart of any relationship.",
+                        "sentence2": "Central to the debate is the issue of privacy.",
+                        "sentence3": "At the heart of the city lies a historic monument."
+                    }
+                },
+                {
+                    "conjunction": "in pursuit of",
+                    "translations": ["peşinde"],
+                    "synonyms": ["chasing"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "He traveled the world in pursuit of knowledge.",
+                        "sentence2": "Chasing fame, she moved to Hollywood.",
+                        "sentence3": "In pursuit of happiness, they left their jobs."
+                    }
+                },
+                {
+                    "conjunction": "by dint of",
+                    "translations": ["sayesinde"],
+                    "synonyms": ["through"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "By dint of hard work, she became successful.",
+                        "sentence2": "Through perseverance, he achieved his goals.",
+                        "sentence3": "By dint of his charisma, he won the election."
+                    }
+                },
+                {
+                    "conjunction": "in relation to",
+                    "translations": ["ilişkin"],
+                    "synonyms": ["related to"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "The report provides data in relation to population growth.",
+                        "sentence2": "This decision is related to budget cuts.",
+                        "sentence3": "In relation to your query, here is the answer."
+                    }
+                },
+                {
+                    "conjunction": "on the part of",
+                    "translations": ["tarafından"],
+                    "synonyms": ["by"],
+                    "additional_meanings": [],
+                    "examples": {
+                        "sentence1": "There was no hesitation on the part of the leader.",
+                        "sentence2": "The mistake was made by the assistant.",
+                        "sentence3": "On the part of the staff, cooperation was excellent."
+                    }
+                }
+            ]
+        }
+        const colors = ['#FFCDD2', '#C8E6C9', '#BBDEFB', '#FFE0B2', '#D1C4E9'];
+
+        function getRandomColor() {
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function createCard(conjunction) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.style.backgroundColor = getRandomColor();
+
+            const title = document.createElement('div');
+            title.className = 'card-title';
+            title.innerText = conjunction.conjunction;
+
+            const translations = document.createElement('div');
+            translations.className = 'card-content';
+            translations.innerText = `Translations: ${conjunction.translations.join(', ')}`;
+
+            const examples = document.createElement('div');
+            examples.className = 'card-examples';
+            examples.innerHTML = `
+                <p>Examples:</p>
+                <p>${conjunction.examples.sentence1}</p>
+                <p>${conjunction.examples.sentence2}</p>
+                <p>${conjunction.examples.sentence3}</p>
+            `;
+
+            card.appendChild(title);
+            card.appendChild(translations);
+            card.appendChild(examples);
+
+            return card;
+        }
+
+        function populateCards() {
+            const container = document.getElementById('card-container');
+            data.conjunctions.forEach(conjunction => {
+                container.appendChild(createCard(conjunction));
+            });
+        }
+
+        populateCards();
+    </script>
+</body>
+
+</html>

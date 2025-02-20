@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menu Cards</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+      padding: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    .card:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="cardContainer"></div>
+  <script>
+    // Menü isimleri (şimdilik "menu1", "menu2", ... şeklinde)
+    const menus = ["baglac", "agustosyokdil100", "pharasal", "yokDılsaglik", "yokdil600", "someyds"];
+    
+    // Kullanılacak rastgele renkler
+    const colors = ['#FFCDD2', '#C8E6C9', '#BBDEFB', '#FFECB3', '#D1C4E9'];
+    
+    const cardContainer = document.getElementById('cardContainer');
+    
+    // Her bir menü için bir kart oluşturuyoruz
+    menus.forEach(menu => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      // Rastgele bir renk ata
+      card.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      card.textContent = menu;
+      
+      // Kart tıklandığında ilgili HTML dosyasına yönlendir
+      card.addEventListener('click', () => {
+        window.location.href = `${menu}.html`;
+      });
+      
+      cardContainer.appendChild(card);
+    });
+  </script>
+</body>
+</html>
